@@ -11,6 +11,8 @@
 
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <link rel="stylesheet" href="{{ mix('css/horizontal-layout.css') }}">
+
+    @yield('links')
     <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
     <script src="{{ mix('js/app.js') }}" defer></script>
 
