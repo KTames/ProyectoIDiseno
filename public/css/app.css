@@ -10981,6 +10981,12 @@ body {
   font-family: Nunito, sans-serif;
 }
 
+html,
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
 .nunito-bold {
   font-family: NunitoBold, sans-serif;
 }

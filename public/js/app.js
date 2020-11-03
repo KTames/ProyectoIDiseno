@@ -37332,6 +37332,17 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/sass/horizontal-layout.scss":
+/*!***********************************************!*\
+  !*** ./resources/sass/horizontal-layout.scss ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/sass/welcome.scss":
 /*!*************************************!*\
   !*** ./resources/sass/welcome.scss ***!
@@ -37344,15 +37355,16 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /***/ }),
 
 /***/ 0:
-/*!*******************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/welcome.scss ***!
-  \*******************************************************************************************/
+/*!***********************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/welcome.scss ./resources/sass/horizontal-layout.scss ***!
+  \***********************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! /Users/macbook/Projects/PHP/Laravel/ProyectoIDiseno/resources/js/app.js */"./resources/js/app.js");
 __webpack_require__(/*! /Users/macbook/Projects/PHP/Laravel/ProyectoIDiseno/resources/sass/app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! /Users/macbook/Projects/PHP/Laravel/ProyectoIDiseno/resources/sass/welcome.scss */"./resources/sass/welcome.scss");
+__webpack_require__(/*! /Users/macbook/Projects/PHP/Laravel/ProyectoIDiseno/resources/sass/welcome.scss */"./resources/sass/welcome.scss");
+module.exports = __webpack_require__(/*! /Users/macbook/Projects/PHP/Laravel/ProyectoIDiseno/resources/sass/horizontal-layout.scss */"./resources/sass/horizontal-layout.scss");
 
 
 /***/ })

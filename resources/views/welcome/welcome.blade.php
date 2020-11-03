@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         <link rel="stylesheet" href="{{ mix('css/welcome.css') }}">
         <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
-
+        <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
     <body>
         <div class="img-header mb-3">
@@ -20,7 +20,7 @@
                     <h1 class="text-white display-4">GroupTree</h1>
                 </div>
                 <div>
-                    <a href="{{ route('welcome') }}" class="btn btn-primary mt-4 shadow">Administrar</a>
+                    <a href="{{ route('admin') }}" class="btn btn-primary mt-4 shadow">Administrar</a>
                 </div>
             </div>
         </div>
