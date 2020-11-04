@@ -6,27 +6,27 @@
 @endsection
 
 @section('content')
-    <div class="row ">
+    <div class="row ml-4">
         <div class="col-md-5 col-sm-12 ">
             <div class="row ">
                 <div class="col-12 col-md-4">
-                    <img src="{{ asset('img/logoTreeGarden.png') }}" height="180" width="140" alt="Logo">
+                    <img src="{{ asset('img/logoTreeGarden.png') }}" height="190" width="140" alt="Logo">
                 </div>
                 <div class="col-12 col-md">
                     @include('admin.__text-item', [
                         'title' => 'Movimiento: ',
-                        'text' => ' '
+                        'text' => 'Tree Garden'
                     ])
                     @include('admin.__text-item', [
                         'title' => 'Cedula juridica: ',
-                        'text' => ' '
-                    ])
-                    @include('admin.__text-item', [
-                        'title' => 'pagweb ',
-                        'text' => ' '
+                        'text' => '3-TTT-CCCCCC'
                     ])
                     @include('admin.__text-item', [
                         'title' => 'Raiz: ',
+                        'text' => 'Coordinación CR'
+                    ])
+                    @include('admin.__text-item', [
+                        'title' => 'www-treegarden.org',
                         'text' => ' '
                     ])
                 </div>
@@ -37,28 +37,28 @@
         </div>
         <div class="col-md-5 col-sm-12 mx-0 my-0">
             <div class="row ">
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-md-6">
                     @include('admin.__text-item', [
                         'title' => 'País: ',
-                        'text' => ' '
+                        'text' => 'Costa Rica'
                     ])
                     @include('admin.__text-item', [
                         'title' => 'Provincia: ',
-                        'text' => ' '
+                        'text' => 'Cartago'
                     ])
                     @include('admin.__text-item', [
                         'title' => 'Señas:',
-                        'text' => ' '
+                        'text' => ' San blas'
                     ])
                </div>
                 <div class="col-12 col-md">
                     @include('admin.__text-item', [
                         'title' => 'Cantón: ',
-                        'text' => ' '
+                        'text' => 'Paraíso'
                     ])
                     @include('admin.__text-item', [
                         'title' => 'Distrito: ',
-                        'text' => ' '
+                        'text' => 'Orosi'
                     ])
                 </div>
             </div>
@@ -116,17 +116,17 @@
                     <label for="country" class="col-md-3 col-form-label">Pais</label>
                     <label for="canton" class="col-md-3 col-form-label">Canton</label>
                     <label for="signals" class="col-md-3 col-form-label">Señas</label>
-                    <div class="col-md-3">
-                        <input type="text" class="form-control" id="name" name="name" >
+                    <div class="col-md-3 ">
+                        <input type="text" class="form-control inner-shadow " id="name" name="name" >
                     </div>
                     <div class="col-md-3">
-                        <input type="text" class="form-control" id="country" name="country" >
+                        <input type="text" class="form-control inner-shadow " id="country" name="country" >
                     </div>
                     <div class="col-md-3">
-                        <input type="text" class="form-control" id="canton" name="canton" >
+                        <input type="text" class="form-control inner-shadow " id="canton" name="canton" >
                     </div>
                     <div class="col-md-3">
-                        <textarea class="form-control" id="signals" name="signals" rows="2"></textarea>
+                        <textarea class="form-control inner-shadow " id="signals" name="signals" rows="2"></textarea>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -134,16 +134,16 @@
                     <label for="state" class="col-md-3 col-form-label">Provincia</label>
                     <label for="district" class="col-md-6 col-form-label">Distrito</label>
                     <div class="col-md-3">
-                        <input type="text" class="form-control" id="web" name="web" >
+                        <input type="text" class="form-control inner-shadow " id="web" name="web" >
                     </div>
                     <div class="col-md-3">
-                        <input type="text" class="form-control" id="state" name="state" >
+                        <input type="text" class="form-control inner-shadow " id="state" name="state" >
                     </div>
                     <div class="col-md-3">
-                        <input type="text" class="form-control" id="district" name="district" >
+                        <input type="text" class="form-control inner-shadow " id="district" name="district" >
                     </div>
                     <div class="col-md-3">
-                        <a href="{{ route('admin') }}" class="btn btn-primary shadow ml-6">Administrar</a>
+                        <a href="{{ route('admin') }}" class="btn btn-primary shadow mx-9">Actualizar</a>
                     </div>
                 </div>
             </form>
