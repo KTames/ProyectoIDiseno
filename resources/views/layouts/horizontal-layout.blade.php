@@ -20,16 +20,9 @@
 <body>
 
 <div class="vertical-navbar">
-    <img src="{{ asset('img/logo.png') }}" alt="">
+    <a href="/"><img src="{{ asset('img/logo.png') }}" alt=""></a>
     <div class="items">
-        <ul>
-            <li>
-                Hola
-            </li>
-            <li>
-                Mundo
-            </li>
-        </ul>
+        @include('layouts.__nav')
     </div>
 </div>
 

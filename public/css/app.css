@@ -10987,7 +10987,24 @@ body {
   width: 100vw;
 }
 
-.nunito-bold {
-  font-family: NunitoBold, sans-serif;
+.nunito-bold,
+b {
+  font-family: NunitoBold, sans-serif !important;
+}
+
+a:not(.btn) {
+  color: #D4C697;
+  text-decoration: underline;
+}
+
+.hline {
+  height: 1px;
+  background-color: #e2e2e2;
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: block;
+  position: relative;
 }
 

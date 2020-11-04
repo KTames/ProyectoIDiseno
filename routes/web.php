@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JerarquiaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () { return view('welcome/welcome'); })->name('welcome');
-Route::get('/admin', function () { return view('admin.index'); })->name('admin');
+
+Route::get('/admin', [JerarquiaController::class, 'adminIndex'])->name('admin');
+Route::match(['put', 'patch'], '/admin/{movimiento}', [JerarquiaController::class, 'edit'])->name('admin.edit');
 
 Auth::routes();
 

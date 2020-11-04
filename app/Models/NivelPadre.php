@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class NivelPadre extends Model
 {
     use HasFactory;
+
+    protected $table = "niveles_padre";
 }
