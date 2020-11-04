@@ -2,6 +2,5 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/welcome.css": "/css/welcome.css",
-    "/css/horizontal-layout.css": "/css/horizontal-layout.css",
-    "/css/admin.index.css": "/css/admin.index.css"
+    "/css/horizontal-layout.css": "/css/horizontal-layout.css"
 }

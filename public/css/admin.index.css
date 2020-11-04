@@ -2,3 +2,27 @@
   color: green;
 }
 
+.img-header {
+  width: 100vw;
+  height: 80vh;
+  position: relative;
+}
+
+.row-header {
+  margin: 0px auto;
+  padding: 0px 0px; }
+
+.row-content {
+  margin: 0px auto;
+  padding: 50px 0px;
+  border-bottom: 1px ridge;
+  min-height: 400px; }
+
+.text-item {
+    word-wrap: break-word;
+  }
+.shadows-item{
+    border: 2px solid red;
+    box-shadow: rgba(2556, 255, 255, 0.25), rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
