@@ -130,6 +130,28 @@
 
 /***/ }),
 
+/***/ "./resources/sass/jerarquia.scss":
+/*!***************************************!*\
+  !*** ./resources/sass/jerarquia.scss ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/sass/miembros.scss":
+/*!**************************************!*\
+  !*** ./resources/sass/miembros.scss ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/sass/welcome.scss":
 /*!*************************************!*\
   !*** ./resources/sass/welcome.scss ***!
@@ -142,9 +164,9 @@
 /***/ }),
 
 /***/ 0:
-/*!*********************************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/welcome.scss ./resources/sass/horizontal-layout.scss ./resources/sass/admin.index.scss ***!
-  \*********************************************************************************************************************************************************************/
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/welcome.scss ./resources/sass/horizontal-layout.scss ./resources/sass/admin.index.scss ./resources/sass/miembros.scss ./resources/sass/jerarquia.scss ***!
+  \************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -152,7 +174,9 @@ __webpack_require__(/*! /Users/macbook/Projects/PHP/Laravel/ProyectoIDiseno/reso
 __webpack_require__(/*! /Users/macbook/Projects/PHP/Laravel/ProyectoIDiseno/resources/sass/app.scss */"./resources/sass/app.scss");
 __webpack_require__(/*! /Users/macbook/Projects/PHP/Laravel/ProyectoIDiseno/resources/sass/welcome.scss */"./resources/sass/welcome.scss");
 __webpack_require__(/*! /Users/macbook/Projects/PHP/Laravel/ProyectoIDiseno/resources/sass/horizontal-layout.scss */"./resources/sass/horizontal-layout.scss");
-module.exports = __webpack_require__(/*! /Users/macbook/Projects/PHP/Laravel/ProyectoIDiseno/resources/sass/admin.index.scss */"./resources/sass/admin.index.scss");
+__webpack_require__(/*! /Users/macbook/Projects/PHP/Laravel/ProyectoIDiseno/resources/sass/admin.index.scss */"./resources/sass/admin.index.scss");
+__webpack_require__(/*! /Users/macbook/Projects/PHP/Laravel/ProyectoIDiseno/resources/sass/miembros.scss */"./resources/sass/miembros.scss");
+module.exports = __webpack_require__(/*! /Users/macbook/Projects/PHP/Laravel/ProyectoIDiseno/resources/sass/jerarquia.scss */"./resources/sass/jerarquia.scss");
 
 
 /***/ })

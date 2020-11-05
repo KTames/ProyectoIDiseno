@@ -45,7 +45,7 @@
         <div class="col-md-3 col-sm-12 my-2 roundedBorders">
             @include('admin.__info-item', [
                     'number' => '85 ',
-                    'description' => 'khabsh',
+                    'description' => 'Miembros',
                     'pngImage' => 'indexMember'
                 ])
         </div>
@@ -110,7 +110,7 @@
                         <input type="text" class="form-control inner-shadow " id="district" name="distrito">
                     </div>
                     <div class="col-md-3 d-flex align-items-end">
-                        <button class="btn btn-primary shadow mx-9" type="submit">Actualizar</a>
+                        <button class="btn btn-primary shadow mx-9 btn-green-moon" type="submit">Actualizar</a>
                     </div>
                 </div>
             </form>

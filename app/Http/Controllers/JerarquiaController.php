@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Movimiento;
 use Illuminate\Http\Request;
 
-use function PHPUnit\Framework\isNull;
-
 class JerarquiaController extends Controller
 {
     public function adminIndex() {
         session(['movimiento' => Movimiento::first()]);
         return view('admin.index', ['movimiento' => session('movimiento')]);
+    }
+
+    public function index() {
+        return view('admin.jerarquia', [session('movimiento')->raiz()]);
     }
 
     /**
@@ -27,8 +29,9 @@ class JerarquiaController extends Controller
                 return substr($key, 0, 1) != "_" && trim($value ? $value : "") != "";
             }
         )->toArray();
+        // $movimiento->nombre = "Hola mundo";
 
-        $movimiento->update(["nombre" => "Hola mundo"]);
+        //$movimiento->update(["nombre" => "Hola mundo"]);
         $movimiento->save();
 
         return back();

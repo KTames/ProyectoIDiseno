@@ -16,6 +16,8 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/welcome.scss', 'public/css')
     .sass('resources/sass/horizontal-layout.scss', 'public/css')
     .sass('resources/sass/admin.index.scss', 'public/css')
+    .sass('resources/sass/miembros.scss', 'public/css')
+    .sass('resources/sass/jerarquia.scss', 'public/css')
 ;
 
 mix.browserSync('http://proyectoidiseno.test/');

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\JerarquiaController;
+use App\Http\Controllers\MiembrosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,9 @@ Route::get('/', function () { return view('welcome/welcome'); })->name('welcome'
 
 Route::get('/admin', [JerarquiaController::class, 'adminIndex'])->name('admin');
 Route::match(['put', 'patch'], '/admin/{movimiento}', [JerarquiaController::class, 'edit'])->name('admin.edit');
+
+Route::get('/miembros', [MiembrosController::class, 'index'])->name('miembros.index');
+Route::get('/jerarquia', [JerarquiaController::class, 'index'])->name('jerarquia.index');
 
 Auth::routes();
 
