@@ -17,7 +17,6 @@ class CreateJefesXGrupoTable extends Migration
             $table->id();
             $table->foreignId("miembro_id")->constrained("miembros", "componente_id");
             $table->foreignId("grupo_id")->constrained("grupos", "nivel_jerarquico_id");
-            $table->timestamps();
         });
     }
 

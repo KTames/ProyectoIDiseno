@@ -24,6 +24,7 @@ class CreateMiembrosTable extends Migration
             $table->string("nombreCompleto");
             $table->string("email");
             $table->string("telefono");
+            $table->boolean("enabled")->default(true);
             $table->timestamps();
         });
     }

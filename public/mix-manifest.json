@@ -5,5 +5,9 @@
     "/css/horizontal-layout.css": "/css/horizontal-layout.css",
     "/css/admin.index.css": "/css/admin.index.css",
     "/css/miembros.css": "/css/miembros.css",
-    "/css/jerarquia.css": "/css/jerarquia.css"
+    "/css/jerarquia.css": "/css/jerarquia.css",
+    "/css/edit-miembros.css": "/css/edit-miembros.css",
+    "/css/asignar-grupo.css": "/css/asignar-grupo.css",
+    "/css/posiciones-jerarquia.css": "/css/posiciones-jerarquia.css",
+    "/css/ippopup.css": "/css/ippopup.css"
 }

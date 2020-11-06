@@ -7,7 +7,12 @@ use App\Models\Miembro;
 class MiembrosController extends Controller
 {
     public function index() {
-        $miembros = Miembro::all();
-        return view('admin.miembros', compact('miembros'));
+        return view('admin.miembros', ['miembros' => session('movimiento')->gestorMiembros()->obtenerCatalogo()->get()]);
+    }
+
+    public function delete(Miembro $miembro) {
+        dd($miembro);
+        session('movimiento')->gestorMiembros()->deleteMiembro($miembro);
+        return back();
     }
 }

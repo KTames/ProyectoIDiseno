@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Miembro extends Model
 {
     use HasFactory;
+    public $incrementing = false;
+
+    public function componente() {
+        return $this->belongsTo(Componente::class, "componente_id");
+    }
 }

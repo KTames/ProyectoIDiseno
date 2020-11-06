@@ -17,7 +17,6 @@ class CreateComponenteXNivelTable extends Migration
             $table->id();
             $table->foreignId("componente_id")->constrained();
             $table->foreignId("nivel_jerarquico_id")->constrained("niveles_jerarquicos", "componente_id");
-            $table->timestamps();
         });
     }
 

@@ -10,4 +10,9 @@ class NivelPadre extends Model
     use HasFactory;
 
     protected $table = "niveles_padre";
+    public $incrementing = false;
+
+    public function nivelJerarquico() {
+        return $this->belongsTo(NivelJerarquico::class);
+    }
 }

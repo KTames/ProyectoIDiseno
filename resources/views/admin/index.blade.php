@@ -81,33 +81,33 @@
 
                     <div class="col-md-3">
                         <label for="name">Nombre</label>
-                        <input type="text" class="form-control inner-shadow " id="name" name="nombre">
+                        <input type="text" class="form-control inner-shadow " id="name" name="nombre" placeholder="{{ $movimiento->nombre }}">
                     </div>
                     <div class="col-md-3">
                         <label for="country">Pais</label>
-                        <input type="text" class="form-control inner-shadow " id="country" name="pais">
+                        <input type="text" class="form-control inner-shadow " id="country" name="pais" placeholder="{{ $movimiento->pais }}">
                     </div>
                     <div class="col-md-3">
                         <label for="canton">Canton</label>
-                        <input type="text" class="form-control inner-shadow " id="canton" name="canton">
+                        <input type="text" class="form-control inner-shadow " id="canton" name="canton" placeholder="{{ $movimiento->canton }}">
                     </div>
                     <div class="col-md-3">
                         <label for="signals">Señas</label>
-                        <textarea class="form-control inner-shadow " id="signals" name="sennas" rows="2"></textarea>
+                        <textarea class="form-control inner-shadow " id="signals" name="sennas" rows="2" placeholder="{{ $movimiento->sennas }}"></textarea>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-3">
                         <label for="web">Sitio web</label>
-                        <input type="text" class="form-control inner-shadow " id="web" name="direccionWeb">
+                        <input type="text" class="form-control inner-shadow " id="web" name="direccionWeb" placeholder="{{ $movimiento->direccionWeb }}">
                     </div>
                     <div class="col-md-3">
                         <label for="state">Provincia</label>
-                        <input type="text" class="form-control inner-shadow " id="state" name="provincia">
+                        <input type="text" class="form-control inner-shadow " id="state" name="provincia" placeholder="{{ $movimiento->provincia }}">
                     </div>
                     <div class="col-md-3">
                         <label for="district">Distrito</label>
-                        <input type="text" class="form-control inner-shadow " id="district" name="distrito">
+                        <input type="text" class="form-control inner-shadow " id="district" name="distrito" placeholder="{{ $movimiento->distrito }}">
                     </div>
                     <div class="col-md-3 d-flex align-items-end">
                         <button class="btn btn-primary shadow mx-9 btn-green-moon" type="submit">Actualizar</a>
@@ -121,5 +121,4 @@
     </div>
 
     </div>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 @endsection

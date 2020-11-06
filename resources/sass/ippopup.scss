@@ -7,3 +7,16 @@
     width: 20rem;
     height: 2rem;
 }
+
+// svg/fondo-curvo.png
+
+.modal-content {
+    background-image: url(/svg/fondo-curvo.png);
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+}
+
+.navbar {
+    width: 80%;
+    overflow: auto;
+  }

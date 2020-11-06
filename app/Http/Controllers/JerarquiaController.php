@@ -13,7 +13,7 @@ class JerarquiaController extends Controller
     }
 
     public function index() {
-        return view('admin.jerarquia', [session('movimiento')->raiz()]);
+        return view('admin.jerarquia.index', [session('movimiento')->raiz()]);
     }
 
     /**
@@ -24,14 +24,17 @@ class JerarquiaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Request $request, Movimiento $movimiento) {
+        // ["nombre" => "Mi movimiento", "cedulaJuridica" => null]
+        // Collection
         $values = collect($request)->filter(
             function ($value, $key) {
                 return substr($key, 0, 1) != "_" && trim($value ? $value : "") != "";
             }
         )->toArray();
-        // $movimiento->nombre = "Hola mundo";
 
-        //$movimiento->update(["nombre" => "Hola mundo"]);
+        foreach ($values as $key => $value)
+            $movimiento[$key] = $value;
+
         $movimiento->save();
 
         return back();

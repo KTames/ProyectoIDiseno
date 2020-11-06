@@ -14,8 +14,7 @@
 
     @yield('links')
     <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
-    <script src="{{ mix('js/app.js') }}" defer></script>
-
+    <script src="{{ mix('js/app.js') }}"></script>
 </head>
 <body>
 
@@ -29,6 +28,6 @@
 <div class="content">
     @yield('content')
 </div>
-
+@yield('scripts')
 </body>
 </html>

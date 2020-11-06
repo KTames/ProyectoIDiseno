@@ -31,7 +31,8 @@ class MiembroFactory extends Factory
             'pais' => 'Costa Rica',
             'nombreCompleto' => $this->faker->name(),
             'email' => $this->faker->safeEmail(),
-            'telefono' => $this->faker->phoneNumber()
+            'telefono' => $this->faker->phoneNumber(),
+            'enabled' => true
         ];
     }
 }

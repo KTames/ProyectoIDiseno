@@ -10,6 +10,7 @@ class NivelJerarquico extends Model
     use HasFactory;
     protected $table = "niveles_jerarquicos";
     protected $primaryKey = "componente_id";
+    public $incrementing = false;
 
     public function hijos() {
         return $this->belongsToMany(Componente::class, "componente_x_nivel", "nivel_jerarquico_id", "componente_id", "componente_id", "id");
@@ -17,5 +18,21 @@ class NivelJerarquico extends Model
 
     public function componente() {
         return $this->belongsTo(Componente::class, "componente_id");
+    }
+
+    public function concreto() {
+        $grupo = $this->hasOne(Grupo::class, "nivel_jerarquico_id", "componente_id");
+        if ($grupo->exists())
+            return $grupo->first();
+
+        $nivelPadre = $this->hasOne(NivelPadre::class, "nivel_jerarquico_id", "componente_id");
+        if ($nivelPadre->exists())
+            return $nivelPadre->first();
+
+        return null;
+    }
+
+    public function niveles() {
+        return $this->hijos()->get()->filter(function ($componente) { return $componente->nivelJerarquico()->exists(); });
     }
 }
