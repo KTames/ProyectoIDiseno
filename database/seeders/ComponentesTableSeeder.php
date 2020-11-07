@@ -25,6 +25,7 @@ class ComponentesTableSeeder extends Seeder
 
         return $nivel;
     }
+
     /**
      * Run the database seeds.
      *
@@ -80,7 +81,26 @@ class ComponentesTableSeeder extends Seeder
         );
         $rama1->hijos()->attach($grupo2->componente);
 
-        foreach (Miembro::where('componente_id', '>', 10)->get() as $miembro)
+        foreach (Miembro::where([['componente_id', '>', 10], ['componente_id', '<', 30]])->get() as $miembro)
             $zona1->hijos()->attach($miembro->componente);
+
+        foreach (Miembro::where([['componente_id', '>=', 30], ['componente_id', '<=', 45]])->get() as $miembro)
+            $grupo1->hijos()->attach($miembro->componente);
+
+        foreach (Miembro::where([['componente_id', '>=', 40]])->get() as $miembro)
+            $grupo1->concreto()->jefes()->attach($miembro);
+
+//        Miembro::where([
+//            ['componente_id', '>', 20],
+//            ['componente_id', '<', 30],
+//        ])
+//            ->get()
+//            ->map(function ($miembro) {
+//                return $miembro->componente()->first();
+//            })
+//            ->each(
+//                function ($item) use ($grupo1) {
+//                    $grupo1->hijos()->attach($item);
+//                });
     }
 }

@@ -24,6 +24,10 @@ class Movimiento extends Model
         return $this->gMiembros;
     }
 
+    public function telefonos() {
+        return $this->hasMany(Telefono::class);
+    }
+
     public function gestorJerarquia() {
         return $this->gJerarquia;
     }

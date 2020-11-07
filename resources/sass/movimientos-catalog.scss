@@ -12,20 +12,29 @@
     overflow-x: scroll;
     display: flex;
     width: 15rem;
+    height: 3rem;
 
     >* {
         display: inline;
         position: relative;
+
+        &:not(first-child) {
+            margin-left: .5rem;
+        }
     }
 
     .eliminar {
         position: absolute;
         top: 0;
-        right: 0;
+        right: 5px;
         width: 10px;
         height: 10px;
-        background-color: red;
         z-index: 2;
+        cursor: pointer;
+        //filter: invert(18%) sepia(99%) saturate(2750%) hue-rotate(356deg) brightness(93%) contrast(86%);
+        //filter: invert(93%) sepia(20%) saturate(738%) hue-rotate(349deg) brightness(88%) contrast(87%);
+        //filter: invert(58%) sepia(7%) saturate(3139%) hue-rotate(31deg) brightness(106%) contrast(80%);
+        filter: invert(15%) sepia(12%) saturate(3789%) hue-rotate(24deg) brightness(96%) contrast(87%);
     }
 
     input {

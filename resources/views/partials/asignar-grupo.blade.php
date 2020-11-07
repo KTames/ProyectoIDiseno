@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="{{ mix('css/asignar-grupo.css') }}">
 
 <div id="asignarGrupoModal" class="modal fade" role="dialog">

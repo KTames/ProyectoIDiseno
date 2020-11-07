@@ -11,6 +11,7 @@ class NivelJerarquico extends Model
     protected $table = "niveles_jerarquicos";
     protected $primaryKey = "componente_id";
     public $incrementing = false;
+    public $guarded = [];
 
     public function hijos() {
         return $this->belongsToMany(Componente::class, "componente_x_nivel", "nivel_jerarquico_id", "componente_id", "componente_id", "id");
@@ -33,6 +34,10 @@ class NivelJerarquico extends Model
     }
 
     public function niveles() {
-        return $this->hijos()->get()->filter(function ($componente) { return $componente->nivelJerarquico()->exists(); });
+        return $this->hijos()->whereIn('componente_id', NivelJerarquico::all()->pluck('componente_id'));
+    }
+
+    public function miembros() {
+        return $this->hijos()->whereNotIn('componente_id', NivelJerarquico::all()->pluck('componente_id'));
     }
 }

@@ -12,6 +12,7 @@
   overflow-x: scroll;
   display: flex;
   width: 15rem;
+  height: 3rem;
 }
 
 .horizontal-scroll > * {
@@ -19,14 +20,19 @@
   position: relative;
 }
 
+.horizontal-scroll > *:not(first-child) {
+  margin-left: 0.5rem;
+}
+
 .horizontal-scroll .eliminar {
   position: absolute;
   top: 0;
-  right: 0;
+  right: 5px;
   width: 10px;
   height: 10px;
-  background-color: red;
   z-index: 2;
+  cursor: pointer;
+  filter: invert(15%) sepia(12%) saturate(3789%) hue-rotate(24deg) brightness(96%) contrast(87%);
 }
 
 .horizontal-scroll input {

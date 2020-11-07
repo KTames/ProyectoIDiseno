@@ -10,17 +10,21 @@
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem sit ad vero repudiandae excepturi rerum, at quas, error deserunt tempore neque laboriosam veniam quae, a nam dolore dolorum sapiente. Quas?</p>
 
         <div class="jerarquia">
-{{--            @foreach (session('movimiento')->raiz()->nivelJerarquico() as $hijo)--}}
-{{--            @include('admin.jerarquia.__recursive-block', ['nivelJerarquico' => $hijo->nivelJerarquico()->first(), 'groupsOnly' => false])--}}
                 @include('admin.jerarquia.__recursive-block', ['nivelJerarquico' => session('movimiento')->raiz(), 'groupsOnly' => false])
-{{--            @endforeach--}}
         </div>
     </div>
+
+    @include('partials.asignar-grupo')
 
     <script>
         function toggleCollapse(id) {
             $("#toggle" + id).toggleClass('flip-triangle');
             $("#collapse" + id).toggleClass('collapse');
+        }
+
+        function showModalNuevoGrupo(args) {
+            console.log(args);
+            $('#asignarGrupoModal').modal('show');
         }
     </script>
 @endsection
