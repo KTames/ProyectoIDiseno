@@ -3,10 +3,13 @@
 <div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="popup" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered "style="max-width: 30%; max-heigth:30%" role="content">
         <div class="ippopup-modal-content modal-content ">
+        <div class="modal-header">
+            <h4 class="nunito-bold">Informacion personal</h4>
+        </div>
             <div class="modal-body">
                 <form >
                     <div class="form-group row">
-                        <input class="personalInfo  mr-2 mb-3" type="text" class="form-control inner-shadow " id="name" name="nombre" placeholder="nombre">
+                        <input class="personalInfo  mr-2 mb-3" type="text" class="form-control inner-shadow " id="name" name="nombre" placeholder="{{ $miembro->identificacion }}">
 
                         <input class="personalInfo  mr-2 mb-3" type="text" class="form-control inner-shadow " id="lastname" name="apellido" placeholder="lastname">
                         <input class="personalInfo mr-2 mb-3" type="text" class="form-control inner-shadow " id="phone" name="telefono" placeholder="telefono">
@@ -25,7 +28,12 @@
                         <input class="personalInfo mr-2 " type="text" class="form-control inner-shadow " id="senias" name="senias" placeholder="señas">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <form action="{{ route('miembros.edit', $miembro) }}" method="post">
+                        @method('edit')
+                        @csrf
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        </form>
+                         
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </form>

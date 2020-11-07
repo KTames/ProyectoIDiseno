@@ -69,7 +69,9 @@
                 <td>{{ $miembro->nombreCompleto }}</td>
                 <td>{{ $miembro->telefono }}</td>
                 <td>{{ $miembro->email }}</td>
-                <td><button class="btn btn-primary shadow btn-green-moon" class="editButton" type="submit" onclick="showModal({{ $miembro }})">Editar</button></td>
+                <td>
+                        <button class="btn btn-primary shadow btn-green-moon" class="editButton" type="submit" onclick="showModal({{ $miembro }})">Editar</button>
+                </td>
                 <td><button class="btn btn-primary shadow btn-green-moon mx-4" type="submit" onclick="showModalPrueba({{ $miembro }})">Ver</button></td>
                 <td>
                   <form action="{{ route('miembros.destroy', $miembro) }}" method="post">
@@ -77,7 +79,7 @@
                       @csrf
                       <button class="btn btn-primary shadow btn-red" type="submit">Eliminar</a>
                     </form>
-              </td>
+                </td>
               </tr>
 
               {{-- @endisset --}}

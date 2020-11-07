@@ -26,6 +26,10 @@ Route::get('/miembros', [MiembrosController::class, 'index'])->name('miembros.in
 
 Route::delete('/miembros/{miembro}', [MiembrosController::class, 'delete'])->name('miembros.destroy');
 
+Route::post('/movimiento', [JerarquiaController::class, 'create'])->name('movimiento.create');
+
+Route::get('/miembros/{miembro, nuevosValores}', [MiembrosController::class, 'edit'])->name('miembros.edit'); //ni idea
+
 Route::get('/jerarquia', [JerarquiaController::class, 'index'])->name('jerarquia.index');
 
 Route::get('/prueba', function () { return view('admin.jerarquia.edit-miembros', ["miembros" => Miembro::all()]); })->name('jerarquia.editMiembro');

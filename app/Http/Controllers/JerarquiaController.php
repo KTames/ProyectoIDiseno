@@ -41,4 +41,10 @@ class JerarquiaController extends Controller
 
         return back();
     }
+
+    public function create(){
+        session('movimiento')->gestorJerarquia()->createMovimiento();
+        return $this->index();
+    }
+
 }

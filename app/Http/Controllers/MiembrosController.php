@@ -14,4 +14,10 @@ class MiembrosController extends Controller
         session('movimiento')->gestorMiembros()->deleteMiembro($miembro);
         return $this->index();
     }
+
+    public function edit($id, $nuevosValores) {
+        session('movimiento')->gestorMiembros()->actualizarDatosPersonales($id, $nuevosValores);
+        return $this->index();
+    }
+    
 }

@@ -5,15 +5,7 @@ use App\Models\Miembro;
 use App\Models\NivelJerarquico;
 use Illuminate\Http\Request;
 
-class GestorMiembro{
-
-    public function actualizarDatosPersonales(Miembro $miembro, $nuevosDatosPersonales) {
-        foreach ($nuevosDatosPersonales as $dato => $nuevoValor)
-            $miembro[$dato] = $nuevoValor;
-
-        $miembro->save();
-    }
-
+class GestorMiembro{ 
     public function obtenerMiembrosNivel(NivelJerarquico $nivel) {
         // $nivel->hijos()
     }
@@ -30,5 +22,11 @@ class GestorMiembro{
         $miembro->save();
 
         return redirect()->route('miembros.index');
+    }
+
+    public function actualizarDatosPersonales(Miembro $miembro, $nuevosDatosPersonales) {
+        foreach ($nuevosDatosPersonales as $dato => $nuevoValor)
+            $miembro[$dato] = $nuevoValor; 
+        $miembro->save();
     }
 }

@@ -24,6 +24,10 @@ class Movimiento extends Model
         return $this->gMiembros;
     }
 
+    public function gestorJerarquia() {
+        return $this->gJerarquia;
+    }
+
     public function raiz() {
         return $this->hasOne(NivelJerarquico::class, "componente_id", "root_id")->first();
     }
