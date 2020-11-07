@@ -20,10 +20,11 @@ class CreateMiembrosTable extends Migration
             $table->string("distrito");
             $table->string("canton");
             $table->string("provincia");
-            $table->string("pais");
+            $table->text("sennas");
             $table->string("nombreCompleto");
             $table->string("email");
             $table->string("telefono");
+            $table->boolean("enabled")->default(true);
             $table->timestamps();
         });
     }

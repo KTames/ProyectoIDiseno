@@ -14,6 +14,6 @@ class MiembrosTableSeeder extends Seeder
      */
     public function run()
     {
-        $miembros = Miembro::factory()->count(50)->create();
+        Miembro::factory()->count(50)->create();
     }
 }

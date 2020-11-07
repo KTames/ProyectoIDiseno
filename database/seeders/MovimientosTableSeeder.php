@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Movimiento;
+use App\Models\NivelJerarquico;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 class MovimientosTableSeeder extends Seeder
 {
@@ -24,8 +24,8 @@ class MovimientosTableSeeder extends Seeder
             "canton" => "Paraíso",
             "distrito" => "Orosi",
             "sennas" => "De la iglesia colonial, 500 metros norte y 50 oeste",
-            "logo" => "logoTreeGarden.png",
-            "root_id" => 1
+            "logo" => "/img/logoTreeGarden.png",
+            "root_id" => NivelJerarquico::first()->componente_id
         ]);
     }
 }
