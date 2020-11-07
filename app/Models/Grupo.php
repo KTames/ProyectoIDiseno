@@ -9,8 +9,10 @@ class Grupo extends Model
 {
     use HasFactory;
     public $incrementing = false;
-
+    // Hola mundo
     public function componente() {
         return $this->belongsTo(NivelJerarquico::class);
     }
+
+    // Hola mundo
 }

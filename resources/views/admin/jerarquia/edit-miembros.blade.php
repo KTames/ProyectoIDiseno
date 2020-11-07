@@ -16,7 +16,7 @@
                 <div class="col-md-12 col-sm-12 ml-5 mt-3 ">
                     <label class="mr-5">Filtrar por:</label>
                     <input class="filterby mr-2 mb-3" type="text" class="form-control inner-shadow " id="filterby" name="filtrar" placeholder="Valor a buscar">
-                    <button class="btn btn-primary btn-block shadow btn-green-moon" type="submit">Buscar</a>
+                    <button class="btn btn-primary btn-block shadow btn-green-moon" type="submit">Buscar</button>
                 </div>
                 <div class="col-md-12 col-sm-12  ml-5 mt-3">
                     <input class="ml-2" type="radio" id="identification" name="filter" value="identification">
@@ -94,7 +94,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td><button class="btn btn-primary shadow btn-red" type="submit">Eliminar</a></td>
+                        <td><button class="btn btn-primary shadow btn-red" type="submit">Eliminar</button></td>
                     </tr>
                 @endforeach
             </tbody>

@@ -26,6 +26,7 @@ mix.autoload({
     .sass('resources/sass/asignar-grupo.scss', 'public/css')
     .sass('resources/sass/posiciones-jerarquia.scss', 'public/css')
     .sass('resources/sass/ippopup.scss', 'public/css')
+    .sass('resources/sass/movimientos-catalog.scss', 'public/css')
 ;
 
 mix.browserSync('http://proyectoidiseno.test/');

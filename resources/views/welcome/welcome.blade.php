@@ -20,7 +20,7 @@
                     <h1 class="text-white display-4">GroupTree</h1>
                 </div>
                 <div>
-                    <a href="{{ route('admin') }}" class="btn btn-primary mt-4 shadow">Administrar</a>
+                    <a href="{{ route('movimientos.index') }}" class="btn btn-primary mt-4 shadow">Administrar</a>
                 </div>
             </div>
         </div>

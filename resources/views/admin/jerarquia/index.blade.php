@@ -10,9 +10,10 @@
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem sit ad vero repudiandae excepturi rerum, at quas, error deserunt tempore neque laboriosam veniam quae, a nam dolore dolorum sapiente. Quas?</p>
 
         <div class="jerarquia">
-            @foreach (session('movimiento')->raiz()->niveles() as $hijo)
-                @include('admin.jerarquia.__recursive-block', ['nivelJerarquico' => $hijo->nivelJerarquico()->first()])
-            @endforeach
+{{--            @foreach (session('movimiento')->raiz()->nivelJerarquico() as $hijo)--}}
+{{--            @include('admin.jerarquia.__recursive-block', ['nivelJerarquico' => $hijo->nivelJerarquico()->first(), 'groupsOnly' => false])--}}
+                @include('admin.jerarquia.__recursive-block', ['nivelJerarquico' => session('movimiento')->raiz(), 'groupsOnly' => false])
+{{--            @endforeach--}}
         </div>
     </div>
 
@@ -21,10 +22,5 @@
             $("#toggle" + id).toggleClass('flip-triangle');
             $("#collapse" + id).toggleClass('collapse');
         }
-        // $(document).ready(function () {
-        //     $('.toggle').click(function ($event) {
-        //         $($event.target).toggleClass('flip-triangle');
-        //     });
-        // });
     </script>
 @endsection

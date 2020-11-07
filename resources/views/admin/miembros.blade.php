@@ -9,15 +9,15 @@
     <div class="row mx-4  mb-2 px-2 d-flex ">
 
         <div class="col-md-5 col-sm-12 d-flex my-3">
-            <div class="row mx-0 ">
-                <div class="pl-5">
+            <div class="row mx-0 d-flex justify-content-center">
+                <div class="">
                     <h2 class="nunito-bold">Catalogo de miembros</h2>
                 </div>
 
-                <div class="col-md-12 col-sm-12 ml-5 mt-3 ">
+                <div class="col-11 mt-2">
                     <label class="mr-5">Filtrar por:</label>
-                    <input class="filterby mr-2 mb-3" type="text" class="form-control inner-shadow " id="filterby" name="filtrar" placeholder="Valor a buscar">
-                    <button class="btn btn-primary btn-block shadow btn-green-moon" type="submit">Buscar</a>
+                    <input class="input-shadow w-100 mr-2 mb-3" type="text" class="form-control inner-shadow " id="filterby" name="filtrar" placeholder="Valor a buscar">
+                    <button class="btn btn-primary btn-block shadow btn-green-moon" type="submit">Buscar</button>
                 </div>
                 <div class="col-md-12 col-sm-12  ml-5 mt-3">
                     <input class="ml-2" type="radio" id="identification" name="filter" value="identification">
@@ -32,7 +32,7 @@
             <div class="row ">
                 <div class="col-md-12 ml-5 my-2 px-0">
                     <p class="nunito-bold py-1" >Agregar miembro</p>
-                    <button class="btn btn-primary shadow mx-9 btn-green-moon" type="submit">Agregar nueva persona</a>
+                    <button class="btn btn-primary shadow mx-9 btn-green-moon" type="submit">Agregar nueva persona</button>
                 </div>
             </div>
         </div>
@@ -46,8 +46,8 @@
     </div>
 
 
-    <h4 class="pl-5 pt-5">Lista de miembros</h4>
-    <div class="box row mt-5 d-flex mx-5 my-custom-scrollbar">
+    <h4 class="pt-5">Lista de miembros</h4>
+    <div class="box mt-4 my-custom-scrollbar">
 
         <table class="table table-hove tableFixHead">
             <thead class="thead-dark">
@@ -63,16 +63,16 @@
             </thead>
             <tbody >
               @foreach ($miembros as $miembro)
-              @isset($miembro)
+              {{-- @isset($miembro) --}}
               <tr>
                 <th scope="row">{{ $miembro->identificacion }}</th>
                 <td>{{ $miembro->nombreCompleto }}</td>
                 <td>{{ $miembro->telefono }}</td>
                 <td>{{ $miembro->email }}</td>
-                <td><button class="btn btn-primary shadow btn-green-moon" class="editButton" type="submit" onclick="showModal({{ $miembro }})">Editar</a></td>
-                <td><button class="btn btn-primary shadow btn-green-moon mx-4" type="submit" onclick="showModalPrueba({{ $miembro }})">Ver</a></td>
+                <td><button class="btn btn-primary shadow btn-green-moon" class="editButton" type="submit" onclick="showModal({{ $miembro }})">Editar</button></td>
+                <td><button class="btn btn-primary shadow btn-green-moon mx-4" type="submit" onclick="showModalPrueba({{ $miembro }})">Ver</button></td>
                 <td>
-                  <form action="{{ route('miembros.destroy', 1) }}" method="post">
+                  <form action="{{ route('miembros.destroy', $miembro) }}" method="post">
                       @method('delete')
                       @csrf
                       <button class="btn btn-primary shadow btn-red" type="submit">Eliminar</a>
@@ -80,7 +80,7 @@
               </td>
               </tr>
 
-              @endisset
+              {{-- @endisset --}}
               @endforeach
             </tbody>
           </table>

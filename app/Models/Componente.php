@@ -15,7 +15,6 @@ class Componente extends Model
 
     public function concreto() {
         $nivelJerarquico = $this->nivelJerarquico();
-
         if ($nivelJerarquico->exists())
             return $nivelJerarquico->first()->concreto();
 

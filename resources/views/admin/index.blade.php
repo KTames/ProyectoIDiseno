@@ -110,7 +110,7 @@
                         <input type="text" class="form-control inner-shadow " id="district" name="distrito" placeholder="{{ $movimiento->distrito }}">
                     </div>
                     <div class="col-md-3 d-flex align-items-end">
-                        <button class="btn btn-primary shadow mx-9 btn-green-moon" type="submit">Actualizar</a>
+                        <button class="btn btn-primary shadow mx-9 btn-green-moon" type="submit">Actualizar</button>
                     </div>
                 </div>
             </form>

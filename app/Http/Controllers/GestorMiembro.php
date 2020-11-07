@@ -23,6 +23,9 @@ class GestorMiembro{
     }
 
     public function deleteMiembro(Miembro $miembro){
+        // Dump and die
+        // dd($miembro->enabled);
+
         $miembro->enabled = false;
         $miembro->save();
 

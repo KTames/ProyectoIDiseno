@@ -22,11 +22,11 @@
   cursor: pointer;
 }
 
-.recursive-block .toggle {
+.recursive-block .inline-toggle {
   display: inline;
 }
 
-.recursive-block .toggle > img {
+.recursive-block .inline-toggle > img {
   height: 0.9rem;
   width: 0.9rem;
   -o-object-fit: contain;

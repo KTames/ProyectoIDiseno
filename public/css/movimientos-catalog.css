@@ -8,6 +8,40 @@
   background-color: #e2e2e2;
 }
 
+.horizontal-scroll {
+  overflow-x: scroll;
+  display: flex;
+  width: 15rem;
+}
+
+.horizontal-scroll > * {
+  display: inline;
+  position: relative;
+}
+
+.horizontal-scroll .eliminar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  z-index: 2;
+}
+
+.horizontal-scroll input {
+  z-index: 1;
+}
+
+.innerShadow {
+  padding: 0 1rem;
+  background: #F8F7F7;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  border: none;
+  height: 2rem;
+}
+
 .btn-green-moon {
   background: #56ab2f;
   /* fallback for old browsers */
@@ -23,13 +57,13 @@
   box-shadow: inset -4px -4px 10px rgba(255, 255, 255, 0.25), inset 4px 4px 18px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   border: none;
-  height: 31rem;
+  height: 40rem;
 }
 
 .my-custom-scrollbar {
   position: relative;
   width: auto;
-  height: 31rem;
+  height: 40rem;
   overflow: auto;
 }
 
@@ -56,7 +90,6 @@
 
 .table td {
   text-align: center;
-  padding-right: 1rem;
 }
 
 .table th {

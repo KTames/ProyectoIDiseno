@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Miembro extends Model
 {
     use HasFactory;
+    protected $primaryKey = "componente_id";
     public $incrementing = false;
 
     public function componente() {
