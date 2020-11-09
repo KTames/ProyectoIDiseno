@@ -3,6 +3,7 @@
 @section('links')
     <link rel="stylesheet" href="{{ mix('css/miembros.css') }}">
     <link rel="stylesheet" href="{{ mix('css/ippopup.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/posiciones-jerarquia.css') }}">
 @endsection
 
 @section('content')
@@ -106,10 +107,10 @@
 
     @include('partials.ippopup')
 
-    @include('partials.asignar-grupo')
+    @include('partials.posiciones-jerarquia')
     <script type="text/javascript">
         function showModalPrueba(args) {
-            $('#asignarGrupoModal').modal('show');
+            $('#reserveModal').modal('show');
         }
     </script>
     {{-- {{ dd($miembros) }} --}}

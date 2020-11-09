@@ -38,7 +38,7 @@ Route::get('/prueba', function () { return view('admin.jerarquia.edit-miembros',
 Route::get('/movimientos', function () { return view('admin.movimientos-catalog', ['movimientos' => Movimiento::all()]); })->name('movimientos.index');
 
 Route::get('/pruebaRoles', function () {
-    session('movimiento')->gestorJerarquia()->obtenerMiembros(56);
+    session('movimiento')->gestorJerarquia()->obtenerMiembros(52);
 });
 
 Auth::routes();

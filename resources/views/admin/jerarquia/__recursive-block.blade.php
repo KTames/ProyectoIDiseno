@@ -24,7 +24,7 @@
     @endif
     <div class="collapse recursive-content" id="collapse{{ $nivelJerarquico->componente_id }}">
         @foreach ($nivelJerarquico->niveles() as $hijo)
-            @include('admin.jerarquia.__recursive-block', ['nivelJerarquico' => $hijo->nivelJerarquico()->first(), 'groupsOnly' => $hijo->concreto()->nivel >= 3, 'showEditMembers' => true])
+            @include('admin.jerarquia.__recursive-block', ['nivelJerarquico' => $hijo->nivelJerarquico()->first(), 'groupsOnly' => $hijo->concreto()->nivel >= 3, 'showEditMembers' => true]->get())
         @endforeach
 
         @include('admin.jerarquia.__add-new', compact('nivelJerarquico', 'groupsOnly'))

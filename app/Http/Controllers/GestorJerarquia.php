@@ -54,10 +54,12 @@ class GestorJerarquia
     }
 
     public function obtenerMiembros($nivelId) {
+
         $nivelJerarquico = NivelJerarquico::where(['componente_id' => $nivelId])->first();
 
         $miembros = [];
         $concreto = $nivelJerarquico->concreto();
+
         if ($nivelJerarquico->concreto() instanceof Grupo) {
             // Es un grupo
             // $miembros = ["jefes" => [24, 53, 70], "monitores" => [], "miembros" => []]
@@ -76,6 +78,7 @@ class GestorJerarquia
             // buscar todos los jefes que no estén en miembros => monitores
             // buscar todos los jefes que estén en miembros => jefes
         } else {
+            $miembros[]=[];
             // Es un nivel padre
 
             // Un jefe es un miembro normal de su nivel jerarquico
@@ -83,10 +86,21 @@ class GestorJerarquia
             // (hay que ver si, de los grupos, solamente los monitores son miembros de las ramas. En este caso, para cada nivel
             // jerárquico hijo, hay que preguntar si es un NivelPadre o un Grupo, y si es Grupo, mostrar solamente los monitores y no los jefes)
 
+            $miembros["jefes"] =
+                $nivelJerarquico->miembros()->whereIn('componente_id', $nivelJerarquico->miembros()->pluck('componente_id'))->get();
 
+            $miembros["monitores"] = [];
+            
+            $miembros["miembros"] = [];
+                foreach($nivelJerarquico->niveles()->get() as $subNivel){
+                    
+                    $subArray[] = $this->obtenerMiembros($subNivel['id']);
+
+                    $miembros["miembros"] = array_only($subArray[2]);
+            }
+            
         }
-
-
+        dd($miembros);
 
         return $miembros;
     }
