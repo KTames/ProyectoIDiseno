@@ -17,6 +17,10 @@ class Miembro extends Model
     }
 
     public function gruposACargo() {
-        return $this->belongsToMany(Grupo::class, "jefes_x_grupo");
+        return $this->belongsToMany(Grupo::class, "jefes_x_grupo", "miembro_id", "grupo_id");
+    }
+    
+    public function niveles() {
+        return $this->belongsToMany(Componente::class, "componente_x_nivel", "componente_id", "nivel_jerarquico_id");
     }
 }

@@ -9,8 +9,9 @@ class NivelPadre extends Model
 {
     use HasFactory;
     public $guarded = [];
-
+    protected $primaryKey = "nivel_jerarquico_id";
     protected $table = "niveles_padre";
+    
     public $incrementing = false;
 
     public function nivelJerarquico() {

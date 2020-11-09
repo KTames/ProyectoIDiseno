@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Componente;
 use App\Models\Grupo;
+use App\Models\Miembro;
 use App\Models\NivelJerarquico;
 use App\Models\NivelPadre;
-use App\Models\Movimiento;
 
 class GestorJerarquia
 {
@@ -32,15 +32,53 @@ class GestorJerarquia
         $nivelJerarquico->hijos()->attach($nuevoNivel->componente);
     }
 
-    private function crearTelefonos($arrayTelefonos) {
+    public function borrar(NivelJerarquico $nivelJerarquico)
+    {
+//        dd($nivelJerarquico);
+
+        $nivelJerarquico->hijos()->detach($nivelJerarquico->hijos()->get());
+
+        $concreto = $nivelJerarquico->concreto();
+
+        if ($concreto instanceof Grupo) {
+            $concreto->jefes()->detach($concreto->jefes()->get());
+        }
+
+
+        foreach ($nivelJerarquico->niveles()->get() as $hijo) {
+            $this->borrar($hijo->nivelJerarquico()->first());
+        }
+
+        $concreto->delete();
+        $nivelJerarquico->delete();
+    }
+
+    public function crearGrupo($datos)
+    {
+        $nivelJerarquico = NivelJerarquico::where(['componente_id' => $datos["nivelJerarquico"]])->first();
+
+        $nuevoNivel = $this->createNivelJerarquico($datos['nombre'], Grupo::class, ["numero_grupo" => $nivelJerarquico->niveles()->count() + 1]);
+
+        $monitor1 = Miembro::where(['identificacion' => $datos["monitor1"]])->first();
+        $nuevoNivel->concreto()->jefes()->attach($monitor1);
+
+        if (isset($datos["monitor2"])) {
+            $monitor2 = Miembro::where(['identificacion' => $datos["monitor2"]])->first();
+            $nuevoNivel->concreto()->jefes()->attach($monitor2);
+        }
+
+        $nivelJerarquico->hijos()->attach($nuevoNivel->componente()->first());
+    }
+
+    private function crearTelefonos($arrayTelefonos)
+    {
         return array_map(function ($telefono) {
-           return ['numero' => $telefono];
+            return ['numero' => $telefono];
         }, $arrayTelefonos);
     }
 
-    public function createMovimiento($datos){
-        $movimiento = Movimiento::create($datos);
-
+    public function inicializarMovimiento($movimiento, $datos)
+    {
         $coordinacion = $this->createNivelJerarquico(
             $datos['nombreCoordinacion'],
             NivelPadre::class,
@@ -53,10 +91,20 @@ class GestorJerarquia
         $movimiento->save();
     }
 
-    public function obtenerMiembros($nivelId) {
+    public function obtenerMiembrosNoAsignados($rolesAsignados)
+    {
+        $asignados = [];
 
+        foreach ($rolesAsignados as $rol)
+            foreach ($rol as $miembro)
+                $asignados[] = $miembro->componente_id;
+
+        return Miembro::whereNotIn('componente_id', $asignados)->get();
+    }
+
+    public function obtenerMiembros($nivelId)
+    {
         $nivelJerarquico = NivelJerarquico::where(['componente_id' => $nivelId])->first();
-
         $miembros = [];
         $concreto = $nivelJerarquico->concreto();
 
@@ -68,6 +116,10 @@ class GestorJerarquia
 
             $miembros["miembros"] =
                 $nivelJerarquico->miembros()->whereNotIn('componente_id', $concreto->jefes()->pluck('componente_id'))->get();
+
+            $miembros["miembros"] = $miembros["miembros"]->map(function ($miembro) {
+                return $miembro->concreto();
+            });
 
             $miembros["monitores"] =
                 $concreto->jefes()->whereNotIn('componente_id', $nivelJerarquico->miembros()->pluck('componente_id'))->get();

@@ -9,6 +9,8 @@ class Grupo extends Model
 {
     use HasFactory;
     public $incrementing = false;
+    protected $guarded = [];
+    protected $primaryKey = "nivel_jerarquico_id";
     // Hola mundo
     public function componente() {
         return $this->belongsTo(NivelJerarquico::class);

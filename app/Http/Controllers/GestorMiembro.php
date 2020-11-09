@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 use App\Models\Componente;
+use App\Models\Grupo;
 use App\Models\Miembro;
 use App\Models\NivelJerarquico;
 use Illuminate\Http\Request;
 
 class GestorMiembro{
-    public function obtenerMiembrosNivel(NivelJerarquico $nivel) {
-        // $nivel->hijos()
-    }
 
     public function obtenerCatalogo($filtro = null){
         if ($filtro == null)
@@ -47,10 +45,23 @@ class GestorMiembro{
     public function posicionMiembroJerarquia(Miembro $miembro){
         $posicionesJerarquia = [];
 
-        $posicionesJerarquia += [54 => "jefe"];
+        $niveles = $miembro->niveles();
+        
+        $gruposACargo = $miembro->gruposACargo();
+        
+        $noGrupoACargo = $niveles->whereNotIn('componente_id', $gruposACargo->pluck('nivel_jerarquico_id'));
+        dd($gruposACargo->get()->map(function ($e) { return $e->nivelJerarquico()->first(); }));
+        
+        foreach ($noGrupoACargo->get() as $nivel)
+        {
+            $concreto = $nivel->concreto();
+            
+            if ($concreto instanceof Grupo) {
+                
+            }
+        }
 
-        // Si el nivel jerarquico es un grupo, estoy en jefes pero no en miembros, soy un monitor
-
-        return redirect()->route('miembros.index');
+        dd($niveles->get());
+        return $posicionesJerarquia;
     }
 }

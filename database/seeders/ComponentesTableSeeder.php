@@ -90,6 +90,10 @@ class ComponentesTableSeeder extends Seeder
         foreach (Miembro::where([['componente_id', '>=', 40]])->get() as $miembro)
             $grupo1->concreto()->jefes()->attach($miembro);
 
+        $grupo1->concreto()->jefes()->attach(Miembro::where(['componente_id' => 15])->first());
+        $grupo1->hijos()->attach(Miembro::where(['componente_id' => 16])->first()->componente);
+        $grupo1->concreto()->jefes()->attach(Miembro::where(['componente_id' => 16])->first());
+
 //        Miembro::where([
 //            ['componente_id', '>', 20],
 //            ['componente_id', '<', 30],

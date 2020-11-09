@@ -51,8 +51,34 @@ class JerarquiaController extends Controller
 
         return back();
     }
+    
+    public function crearGrupo(Request $request) {
+        $data = [];
+        if (trim($request->monitor2 ?? "") !== "")
+            $data = $request->validate([
+                "monitor1" => "required|exists:miembros,identificacion",
+                "monitor2" => "exists:miembros,identificacion",
+                "nombre" => "required",
+                "nivelJerarquico" => "required"
+            ]);
+        else
+            $data = $request->validate([
+                "monitor1" => "required|exists:miembros,identificacion",
+                "nombre" => "required",
+                "nivelJerarquico" => "required"
+            ]);
+        
+        session('movimiento')->gestorJerarquia()->crearGrupo($data);
+        
+        return back();
+    }
+    
+    public function delete(NivelJerarquico $nivelJerarquico) {
+        session('movimiento')->gestorJerarquia()->borrar($nivelJerarquico);
+        return back();
+    }
 
-    public function create(Request $request) {
+    public function crearMovimiento(Request $request) {
         $datosMovimiento = $request->validate(
             [
                 'cedulaJuridica' => 'required',
@@ -73,10 +99,19 @@ class JerarquiaController extends Controller
         });
 
         \Validator::validate(["telefonos" => $telefonos], ["telefonos.0" => "required"], ["telefono.0.required" => "Ingrese al menos un número de teléfono"]);
-
-        session('movimiento')->gestorJerarquia()->createMovimiento($datosMovimiento);
+        
+        $movimiento = Movimiento::create($datosMovimiento);
+        $movimiento->inicializar($datosMovimiento);
 
         return back();
+    }
+    
+    public function verMiembros(NivelJerarquico $nivelJerarquico) {
+        $miembros = session('movimiento')->gestorJerarquia()->obtenerMiembros($nivelJerarquico);
+        $miembros["ninguno"] = session('movimiento')->gestorJerarquia()->obtenerMiembrosNoAsignados($nivelJerarquico);
+        
+        dd(compact('nivelJerarquico', 'miembros'));
+        return view('admin.jerarquia.edit-miembros', compact('nivelJerarquico', 'miembros'));
     }
 
 }

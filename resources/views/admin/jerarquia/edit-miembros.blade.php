@@ -75,7 +75,7 @@
                 <th scope="col"> </th>
               </tr>
             </thead>
-            <tbody >
+            <tbody>
                 @foreach ($miembros as $i => $miembro)
                     <tr>
                         <th scope="row">{{ $miembro->identificacion }}</th>
