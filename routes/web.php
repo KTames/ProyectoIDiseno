@@ -45,14 +45,21 @@ Route::get('/pruebaRoles', function () {
     session('movimiento')->gestorJerarquia()->obtenerMiembros(58);
 });
 
+Route::get('/pruebaJerarquia', function () {
+    session('movimiento')->gestorJerarquia()->obtenerMiembros(58);
+});
+
 Route::get('/pruebaNoAsignados', function () {
     $miembros = session('movimiento')->gestorJerarquia()->obtenerMiembros(58);
     return session('movimiento')->gestorJerarquia()->obtenerMiembrosNoAsignados($miembros);
 });
 
-Route::get('/pruebaRolesMiembro', function () {
-    return session('movimiento')->gestorMiembros()->posicionMiembroJerarquia(Miembro::where(['componente_id'=>15])->first());
+Route::get('/rolesMiembros/{miembro}', [MiembrosController::class,'obtenerRolesMiembro'])->name('miembros.roles');
+/**Route::get('/pruebaRolesMiembro', function () {
+    return session('movimiento')->gestorMiembros()->posicionesMiembroJerarquia(Miembro::where(['componente_id'=>45])->first());
 });
+
+**/
 
 Auth::routes();
 

@@ -85,7 +85,7 @@
                     </td>
                     <td>
                         <button class="btn btn-primary shadow btn-green-moon mx-4" type="submit"
-                                onclick="showModalPrueba({{ $miembro }})">Ver
+                                onclick="showModalPrueba({{ 'miembros.roles'  }})">Ver
                         </button>
                     </td>
                     <td>
@@ -108,6 +108,7 @@
         function showModalPrueba(args) {
             $('#reserveModal').modal('show');
         }
+
     </script>
     {{-- {{ dd($miembros) }} --}}
 @endsection

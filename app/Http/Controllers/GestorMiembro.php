@@ -42,26 +42,32 @@ class GestorMiembro{
         $miembro->save();
     }
 
-    public function posicionMiembroJerarquia(Miembro $miembro){
+    public function posicionesMiembroJerarquia(Miembro $miembro)  {
         $posicionesJerarquia = [];
 
-        $niveles = $miembro->niveles();
-        
-        $gruposACargo = $miembro->gruposACargo();
-        
-        $noGrupoACargo = $niveles->whereNotIn('componente_id', $gruposACargo->pluck('nivel_jerarquico_id'));
-        dd($gruposACargo->get()->map(function ($e) { return $e->nivelJerarquico()->first(); }));
-        
-        foreach ($noGrupoACargo->get() as $nivel)
-        {
-            $concreto = $nivel->concreto();
-            
-            if ($concreto instanceof Grupo) {
-                
-            }
-        }
+        $componentes = $miembro->niveles()->get();
 
-        dd($niveles->get());
+        $gruposACargo = $miembro->gruposACargo()->get()->map(function ($e) {
+            return $e->nivelJerarquico()->first();
+        });
+
+        $idsGruposACargo = $gruposACargo->pluck('componente_id')->toArray();
+
+        foreach ($componentes as $componente)
+            if ($componente->nivelJerarquico()->first()->concreto() instanceof Grupo)
+                if (in_array($componente->id, $idsGruposACargo))
+                    $posicionesJerarquia[] = [$componente->nivelJerarquico()->first(), "jefe"];
+                else
+                    $posicionesJerarquia[] = [$componente->nivelJerarquico()->first(), "miembro"];
+            else
+                $posicionesJerarquia[] = [$componente->nivelJerarquico()->first(), "jefe"];
+
+
+        $idsJerarquia = $componentes->pluck('id')->toArray();
+        foreach ($idsGruposACargo as $key => $idGrupo)
+            if (!in_array($idGrupo, $idsJerarquia))
+                $posicionesJerarquia[] = [$gruposACargo[$key], "monitor"];
+
         return $posicionesJerarquia;
     }
 }

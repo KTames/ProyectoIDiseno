@@ -47,9 +47,10 @@ class MiembrosController extends Controller
 
         return back();
     }
-    
+
     public function obtenerRolesMiembro(Miembro $miembro) {
-        
+        return ['posicionesJerarquia' =>session('movimiento')->gestorMiembros()->posicionJerarquia($miembro)];
     }
+
 
 }

@@ -12,16 +12,17 @@
                             <tr>
                                 <th scope="col">Nivel</th>
                                 <th scope="col">Rol</th>
-                          
+                                <th scope="col">Cambio</th>
                             </tr>
                             </thead>
                             <tbody>
-                                 {{-- @foreach () --}}
+                                @foreach ($posicionesJerarquia as $posicion)
                                    <tr>
-                                        <th scope="row">Nivel</th>
+                                        <th scope="row">  head($posicion) </th>
                                         <td>Rol</td>
+                                        <td><button type="button" class="btn btn-primary btn-green-moon" >Cambiar</button></td>
                                     </tr>
-                                 {{-- @endforeach --}}
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -29,8 +30,9 @@
                 <div class="d-flex justify-content-end">
                     <button type="button" class="btn btn-secondary btn-green-moon" data-dismiss="modal">Salir</button>
                 </div>
-                    
+
             </div>
         </div>
     </div>
 </div>
+<th scope="col">Rol</th>

@@ -141,15 +141,15 @@ class GestorJerarquia
                 $nivelJerarquico->miembros()->whereIn('componente_id', $nivelJerarquico->miembros()->pluck('componente_id'))->get();
 
             $miembros["monitores"] = [];
-            
+
             $miembros["miembros"] = [];
                 foreach($nivelJerarquico->niveles()->get() as $subNivel){
-                    
+
                     $subArray = $this->obtenerMiembros($subNivel['id']);
 
                     $miembros["miembros"] = array_where($subArray,'miembros');
             }
-            
+
         }
         dd($miembros);
 
