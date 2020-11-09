@@ -78,7 +78,6 @@ class GestorJerarquia
             // buscar todos los jefes que no estén en miembros => monitores
             // buscar todos los jefes que estén en miembros => jefes
         } else {
-            $miembros[]=[];
             // Es un nivel padre
 
             // Un jefe es un miembro normal de su nivel jerarquico
@@ -94,9 +93,9 @@ class GestorJerarquia
             $miembros["miembros"] = [];
                 foreach($nivelJerarquico->niveles()->get() as $subNivel){
                     
-                    $subArray[] = $this->obtenerMiembros($subNivel['id']);
+                    $subArray = $this->obtenerMiembros($subNivel['id']);
 
-                    $miembros["miembros"] = array_only($subArray[2]);
+                    $miembros["miembros"] = array_where($subArray,'miembros');
             }
             
         }
