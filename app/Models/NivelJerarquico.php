@@ -33,6 +33,10 @@ class NivelJerarquico extends Model
         return null;
     }
 
+    public function padre() {
+        return $this->belongsToMany(NivelJerarquico::class, "componente_x_nivel", "componente_id", "nivel_jerarquico_id", "componente_id", "componente_id");
+    }
+
     public function niveles() {
         return $this->hijos()->whereIn('componente_id', NivelJerarquico::all()->pluck('componente_id'));
     }

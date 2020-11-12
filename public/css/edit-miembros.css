@@ -64,3 +64,22 @@
   z-index: 0;
 }
 
+.btn-green-moon {
+  background: #56ab2f;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #8FA44A, #BEDB60);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #fff;
+  border: none;
+}
+
+.btnR {
+  border-radius: 3px;
+  height: 2rem;
+}
+
+select option {
+  color: black;
+}
+

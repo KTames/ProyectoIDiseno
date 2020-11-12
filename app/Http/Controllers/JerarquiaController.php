@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Miembro;
 use App\Models\Movimiento;
 use App\Models\NivelJerarquico;
 use Illuminate\Http\Request;
 
 class JerarquiaController extends Controller
 {
-    public function adminIndex(Movimiento $movimiento = null) {
+    public function adminIndex(Movimiento $movimiento = null)
+    {
         if ($movimiento !== null)
             session(['movimiento' => $movimiento]);
         return view('admin.index', ['movimiento' => session('movimiento')]);
     }
 
-    public function index() {
+    public function index()
+    {
         return view('admin.jerarquia.index', [session('movimiento')->raiz()]);
     }
 
@@ -25,7 +28,8 @@ class JerarquiaController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Movimiento $movimiento) {
+    public function edit(Request $request, Movimiento $movimiento)
+    {
         // ["nombre" => "Mi movimiento", "cedulaJuridica" => null]
         // Collection
         $values = collect($request)->filter(
@@ -42,7 +46,8 @@ class JerarquiaController extends Controller
         return back();
     }
 
-    public function crearNivelPadre(Request $request, NivelJerarquico $nivelJerarquico) {
+    public function crearNivelPadre(Request $request, NivelJerarquico $nivelJerarquico)
+    {
         $request->validate([
             'nombre' => 'required'
         ]);
@@ -52,7 +57,43 @@ class JerarquiaController extends Controller
         return back();
     }
 
-    public function create(Request $request) {
+    public function crearGrupo(Request $request)
+    {
+
+        $reglasValidacion = [
+            "monitor1" => "required|exists:miembros,identificacion",
+            "numero" => "required",
+            "nivelJerarquico" => "required"
+        ];
+
+
+        if (trim($request->monitor2 ?? "") !== "")
+            $reglasValidacion +=
+                ["monitor2" => "exists:miembros,identificacion"];
+
+        if (trim($request->nombre ?? "") !== "")
+            if (session('movimiento')->gestorJerarquia()->validarNombreGrupoUnico(session('movimiento')->raiz(), $request->nombre))
+                $reglasValidacion +=
+                    ["nombre" => "required"];
+            else
+                return back()->withErrors(['nombre', 'Ya hay un nivel en su jerarquía con ese nombre']);
+
+
+        $data = $request->validate($reglasValidacion);
+
+        session('movimiento')->gestorJerarquia()->crearGrupo($data);
+
+        return back();
+    }
+
+    public function delete(NivelJerarquico $nivelJerarquico)
+    {
+        session('movimiento')->gestorJerarquia()->borrar($nivelJerarquico);
+        return back();
+    }
+
+    public function crearMovimiento(Request $request)
+    {
         $datosMovimiento = $request->validate(
             [
                 'cedulaJuridica' => 'required',
@@ -74,9 +115,47 @@ class JerarquiaController extends Controller
 
         \Validator::validate(["telefonos" => $telefonos], ["telefonos.0" => "required"], ["telefono.0.required" => "Ingrese al menos un número de teléfono"]);
 
-        session('movimiento')->gestorJerarquia()->createMovimiento($datosMovimiento);
+        $movimiento = Movimiento::create($datosMovimiento);
+        $movimiento->inicializar($datosMovimiento);
 
         return back();
     }
 
+    public function verMiembros(NivelJerarquico $nivelJerarquico)
+    {
+        $miembrosSinFiltrar = session('movimiento')->gestorJerarquia()->obtenerMiembros($nivelJerarquico->componente_id);
+        $rolesDisponibles = array_keys($miembrosSinFiltrar);
+        $miembros = collect([]);
+        $rolesFiltrados = request()->filtro;
+
+        if ($rolesFiltrados != null) {
+            foreach ($rolesFiltrados as $rolFiltrado)
+                $miembros = $miembros->merge([$rolFiltrado => $miembrosSinFiltrar[$rolFiltrado]]);
+        } else
+            foreach ($miembrosSinFiltrar as $key => $rol)
+                $miembros = $miembros->merge([$key => $rol]);
+        //dd($miembros);
+
+        return view('admin.jerarquia.edit-miembros', compact('nivelJerarquico', 'miembros', 'rolesDisponibles', 'rolesFiltrados'));
+    }
+
+    public function obtenerJerarquiaMismoNivel(NivelJerarquico $nivelJerarquico)
+    {
+        return session('movimiento')
+            ->gestorJerarquia()
+            ->obtenerJerarquiaMismoNivel($nivelJerarquico);
+    }
+
+    public function cambiarDeNivel()
+    {
+        session('movimiento')
+            ->gestorMiembros()
+            ->trasladarMiembro(
+                request()->viejoNivel,
+                request()->nuevoNivel,
+                request()->miembro,
+                request()->rol
+            );
+        return back();
+    }
 }

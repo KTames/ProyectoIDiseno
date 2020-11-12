@@ -3,6 +3,8 @@
 @section('links')
     <link rel="stylesheet" href="{{ mix('css/miembros.css') }}">
     <link rel="stylesheet" href="{{ mix('css/ippopup.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/posiciones-jerarquia.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/cambio-jerarquia.css') }}">
 @endsection
 
 @section('content')
@@ -15,7 +17,6 @@
 
                     <div class="col-11 mt-2">
                         <form method="get" action="{{ route('miembros.index') }}">
-                            @csrf
                             <label class="mr-5">Filtrar por:</label>
                             <input class="input-shadow w-100 mr-2 mb-3" type="text" class="form-control inner-shadow "
                                    id="filterby" name="valor" placeholder="Valor a buscar" value="{{ isset($filtro) ? $filtro['valor'] : '' }}">
@@ -50,7 +51,7 @@
         <div class="col-md mx-4">
             <div class="row d-flex justify-content-end ml-0 pl-0">
                 <img src="{{ session('movimiento')->logo }}" alt="Logo {{ session('movimiento')->nombre }}"
-                     class="movement-logo">
+                     class="movement-logo img-thumbnail border-0">
                 <span class="d-md-none d-sm-block space-separator"></span>
             </div>
         </div>
@@ -73,7 +74,6 @@
             </thead>
             <tbody>
             @foreach ($miembros as $miembro)
-                {{-- @isset($miembro) --}}
                 <tr>
                     <th scope="row">{{ $miembro->identificacion }}</th>
                     <td>{{ $miembro->nombreCompleto }}</td>
@@ -86,7 +86,7 @@
                     </td>
                     <td>
                         <button class="btn btn-primary shadow btn-green-moon mx-4" type="submit"
-                                onclick="showModalPrueba({{ $miembro }})">Ver
+                                onclick="showModalPosicionesJerarquia({{ $miembro }})">Ver
                         </button>
                     </td>
                     <td>
@@ -97,20 +97,10 @@
                         </form>
                     </td>
                 </tr>
-
-                {{-- @endisset --}}
             @endforeach
             </tbody>
         </table>
     </div>
-
     @include('partials.ippopup')
-
-    @include('partials.asignar-grupo')
-    <script type="text/javascript">
-        function showModalPrueba(args) {
-            $('#asignarGrupoModal').modal('show');
-        }
-    </script>
-    {{-- {{ dd($miembros) }} --}}
+    @include('partials.posiciones-jerarquia')
 @endsection

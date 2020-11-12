@@ -10,7 +10,11 @@
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem sit ad vero repudiandae excepturi rerum, at quas, error deserunt tempore neque laboriosam veniam quae, a nam dolore dolorum sapiente. Quas?</p>
 
         <div class="jerarquia">
-                @include('admin.jerarquia.__recursive-block', ['nivelJerarquico' => session('movimiento')->raiz(), 'groupsOnly' => false])
+                @include('admin.jerarquia.__recursive-block', [
+                    'nivelJerarquico' => session('movimiento')->raiz(), 
+                    'groupsOnly' => false, 'canErase' => false
+                    ]
+                )
         </div>
     </div>
 
@@ -20,11 +24,6 @@
         function toggleCollapse(id) {
             $("#toggle" + id).toggleClass('flip-triangle');
             $("#collapse" + id).toggleClass('collapse');
-        }
-
-        function showModalNuevoGrupo(args) {
-            console.log(args);
-            $('#asignarGrupoModal').modal('show');
         }
     </script>
 @endsection

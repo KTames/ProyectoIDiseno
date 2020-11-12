@@ -12,10 +12,10 @@
                 <div class="pl-5">
                     <h2 class="nunito-bold">Editar miembros</h2>
                 </div>
-
                 <div class="col-md-12 col-sm-12 ml-5 mt-3 ">
                     <label class="mr-5">Filtrar por:</label>
-                    <input class="filterby mr-2 mb-3" type="text" class="form-control inner-shadow " id="filterby" name="filtrar" placeholder="Valor a buscar">
+                    <input class="filterby mr-2 mb-3" type="text" class="form-control inner-shadow " id="filterby"
+                           name="filtrar" placeholder="Valor a buscar">
                     <button class="btn btn-primary btn-block shadow btn-green-moon" type="submit">Buscar</button>
                 </div>
                 <div class="col-md-12 col-sm-12  ml-5 mt-3">
@@ -31,23 +31,24 @@
             <div class="row ">
                 <div class="custom-control custom-checkbox">
                     <div class="col-md-12 ml-5 my-2 px-0">
-                        <p class="nunito-bold" >Mostrar roles</p>
-                        <div class="col-md-12 ml-5 my-2 px-0">
-                            <input type="checkbox" class="custom-control-input " id="noAsignado">
-                            <label class="custom-control-label" for="noAsignado">No asignado</label>
-                        </div>
-                        <div class="col-md-12 ml-5 my-2 px-0">
-                            <input type="checkbox" class="custom-control-input" id="miembro">
-                            <label class="custom-control-label" for="miembro">Miembro</label>
-                        </div>
-                        <div class="col-md-12 ml-5 my-2 px-0">
-                            <input type="checkbox" class="custom-control-input" id="monitor">
-                            <label class="custom-control-label" for="monitor">Monitor</label>
-                        </div>
-                        <div class="col-md-12 ml-5 my-2 px-0">
-                            <input type="checkbox" class="custom-control-input" id="jefe">
-                            <label class="custom-control-label" for="jefe">Jefe</label>
-                        </div>
+                        <form action="{{ route('jerarquia.miembros', $nivelJerarquico) }}">
+                            <p class="nunito-bold">Mostrar roles</p>
+                            @foreach($rolesDisponibles as $rol)
+                                <div class="col-md-12 ml-5 my-2 px-0">
+                                    <input type="checkbox"
+                                           id="chk{{$rol}}"
+                                           class="custom-control-input"
+                                           name="filtro[]"
+                                           value="{{ $rol }}"
+                                        {{ $rolesFiltrados != null ? in_array($rol, $rolesFiltrados) ? 'checked' : '' : 'checked' }}
+                                    >
+                                    <label class="custom-control-label" for="chk{{$rol}}">{{ ucfirst($rol) }}</label>
+                                </div>
+                            @endforeach
+                            <button type="submit" class="btn btn-primary btn-block shadow btn-green-moon">
+                                Mostrar roles
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -55,7 +56,8 @@
 
         <div class="col-md mx-4">
             <div class="row d-flex justify-content-end ml-0 pl-0">
-                <img src="{{ session('movimiento')->logo }}" alt="Logo {{ session('movimiento')->nombre }}" class="movement-logo">
+                <img src="{{ session('movimiento')->logo }}" alt="Logo {{ session('movimiento')->nombre }}"
+                     class="movement-logo">
                 <span class="d-md-none d-sm-block space-separator"></span>
             </div>
         </div>
@@ -67,44 +69,59 @@
 
         <table class="table table-hover tableFixHead">
             <thead class="thead-dark">
-              <tr>
+            <tr>
                 <th scope="col">Identificación</th>
                 <th scope="col">Nombre</th>
-                <th scope="col">Estado</th>
-                <th scope="col">Acciones</th>
-                <th scope="col"> </th>
-              </tr>
+                <th scope="col">Rol <small>(click sobre un rol para cambiarlo)</small></th>
+            </tr>
             </thead>
-            <tbody >
-                @foreach ($miembros as $i => $miembro)
+            <tbody>
+            @foreach ($miembros as $rol => $array)
+                @foreach($array as $miembro)
                     <tr>
                         <th scope="row">{{ $miembro->identificacion }}</th>
                         <td>{{ $miembro->nombreCompleto }}</td>
-                        <td>{{ $miembro->enabled}}</td>
                         <td>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-primary ddbutton">Action</button>
-                                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split ddbutton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="sr-only">Toggle Dropdown</span>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Jefe</a>
-                                    <a class="dropdown-item" href="#">Monitor</a>
-                                    <a class="dropdown-item" href="#">Miembro</a>
-                                </div>
-                            </div>
+                            <form action="{{ route('miembros.asignarRol') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="nivelJerarquico" value="{{ $nivelJerarquico->componente_id }}">
+                                <input type="hidden" name="miembro" value="{{ $miembro->componente_id }}">
+                                <input type="hidden" name="viejoRol" value="{{ $rol }}">
+                                <select name="rol" class="btn-green-moon btnR justify-content-center"
+                                        onchange="mostrarAlertaCambioRol('{{ $rol }}',$nivelJerarquico->componente_id,$miembro->componente_id, this.value, this.form)">
+                                    @foreach($rolesDisponibles as $rolCambio)
+                                        <option
+                                            value="{{ $rolCambio }}"
+                                            {{ $rol == $rolCambio
+                                                ? 'disabled selected'
+                                                : ''
+                                            }}
+                                        >
+                                            {{ ucfirst($rolCambio) }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </form>
                         </td>
-                        <td><button class="btn btn-primary shadow btn-red" type="submit">Eliminar</button></td>
                     </tr>
                 @endforeach
+            @endforeach
             </tbody>
-          </table>
+        </table>
     </div>
 
     <script>
-        $(document).ready(function(){
-            $(".editButton").click(function(){
-                alert("Sirvo");
+        function mostrarAlertaCambioRol(viejoRol, nivelJerarquico,miembro,nuevoRol, form) {
+            if (confirm('¿Está seguro de que quiere cambiar el ' + viejoRol + ' a ' + nuevoRol + '?')){
+                form.submit();
+                {{--No funciona :c--}}
+                $.ajax('/asignarRol/').done((data) => _asignarRol(nivelJerarquico,miembro, viejoRol, nuevoRol));
+            }
+                
+        }
+
+        $(document).ready(function () {
+            $(".editButton").click(function () {
                 $('#popup').modal('show');
             });
         });

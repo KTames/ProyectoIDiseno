@@ -108,7 +108,7 @@
                             <td>{{ $movimiento->nombre }}</td>
                             <td>{{ $movimiento->direccionWeb }}</td>
                             <td>{{ $movimiento->sennas }}</td>
-                            <td>{{ $movimiento->telefonos()->exists() ? implode(", ", dd($movimiento->telefonos()->get()->pluck("numero"))) : "" }}</td>
+                            <td>{{ $movimiento->telefonos()->exists() ? implode(", ", $movimiento->telefonos()->get()->pluck("numero")->toArray()) : "" }}</td>
                             <td><img src="{{ $movimiento->logo }}" alt="logo" width="50" height="50"></td>
                             <td> <a href="{{ route('admin', compact('movimiento')) }}" class="btn btn-primary shadow">Administrar</a></td>
                         </tr>
