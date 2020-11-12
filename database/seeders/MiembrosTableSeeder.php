@@ -20,8 +20,18 @@ class MiembrosTableSeeder extends Seeder
             'identificacion' => '305210230'
         ]);
         Miembro::factory()->create([
-            'nombreCompleto' => 'Johan Tames Fernández',
-            'identificacion' => '305550053'
+            'nombreCompleto' => 'Steven Quesada Jimenez',
+            'identificacion' => '117260675'
+        ]);
+        Miembro::factory()->create([
+            'nombreCompleto' => 'Marlen Solano Solano'
+        ]);
+        Miembro::factory()->create([
+            'nombreCompleto' => 'Carlos Vega Núñez',
+            'identificacion' => '11720740'
+        ]);
+        Miembro::factory()->create([
+            'nombreCompleto' => 'Elras Cabuches'
         ]);
     }
 }

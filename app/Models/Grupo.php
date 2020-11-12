@@ -19,7 +19,7 @@ class Grupo extends Model
     public function nivelJerarquico() {
         return $this->belongsTo(NivelJerarquico::class, "nivel_jerarquico_id", "componente_id");
     }
-
+    
     public function jefes() {
         return $this->belongsToMany(Miembro::class, "jefes_x_grupo", "grupo_id", "miembro_id", "nivel_jerarquico_id");
     }

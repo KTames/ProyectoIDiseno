@@ -10,17 +10,20 @@
                 {{ $nivelJerarquico->nombre }} <img src="{{ asset('svg/triangle-right.svg') }}" alt="">
             </div>
             @isset($showEditMembers)
-                <a href="#">
+                <a href="{{ route('jerarquia.miembros',$nivelJerarquico)}} ">
                     Editar miembros
                 </a>
             @endisset
         </a>
     @else
         <div class="inline-toggle">
-            {{ $nivelJerarquico->nombre }} [ #{{ $nivelJerarquico->concreto()->numero_grupo }}] <a href="#"
-                                                                                                   class="ml-4">
-                Editar miembros
-            </a>
+            {{ $nivelJerarquico->nombre . ": "}}
+            @isset($showEditMembers)
+                <a href="{{ route('jerarquia.miembros',$nivelJerarquico)}} ">
+                    Editar miembros
+                </a>
+            @endisset
+            {{-- </a> --}}
         </div>
     @endif
     @if($canErase)

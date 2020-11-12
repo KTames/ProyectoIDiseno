@@ -1,4 +1,3 @@
-
 <div id="reserveModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="posiciones-modal-content modal-content">
@@ -14,15 +13,17 @@
                                 <th scope="col">Rol</th>
                                 <th scope="col">Cambio</th>
                             </tr>
+                            <tr id="templatePosicionesJerarquia" class="d-none">
+                                <th scope="row" class="nivel"></th>
+                                <td class="rol">Rol</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary btn-green-moon">
+                                        Cambiar
+                                    </button>
+                                </td>
+                            </tr>
                             </thead>
-                            <tbody>
-                                @foreach ($posicionesJerarquia as $posicion)
-                                   <tr>
-                                        <th scope="row">  head($posicion) </th>
-                                        <td>Rol</td>
-                                        <td><button type="button" class="btn btn-primary btn-green-moon" >Cambiar</button></td>
-                                    </tr>
-                                @endforeach
+                            <tbody id="posicionesJerarquiaBody">
                             </tbody>
                         </table>
                     </div>
@@ -35,4 +36,39 @@
         </div>
     </div>
 </div>
-<th scope="col">Rol</th>
+@include('partials.cambio-jerarquia')
+
+<script>
+    function showModalPosicionesJerarquia(miembro) {
+
+        $.ajax('/rolesMiembros/' + miembro.componente_id)
+            .done(function (respuesta) {
+                mostrarConDatos(respuesta, miembro);
+            });
+
+    }
+
+    function mostrarConDatos(data, miembro) {
+
+        const body = $("#posicionesJerarquiaBody");
+        body.html("");
+
+        data.forEach(function (rol) {
+            const template = $("#templatePosicionesJerarquia").clone();
+            template.removeClass("d-none");
+
+            const boton = template.find("button")[0];
+
+            $(boton).click(function () {
+                showCambioJerarquiaModal(rol, miembro);
+            });
+
+            $(template.find(".nivel")[0]).html(rol[0].nombre);
+            $(template.find(".rol")[0]).html(rol[1].replace(/^\w/, (c) => c.toUpperCase()));
+
+            body.append(template);
+        });
+
+        $('#reserveModal').modal('show');
+    }
+</script>

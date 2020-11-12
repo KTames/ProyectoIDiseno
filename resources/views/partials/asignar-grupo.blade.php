@@ -2,7 +2,6 @@
 
 <div id="asignarGrupoModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-md" role="content">
-        <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title nunito-bold">Agregar grupo</h3>
@@ -35,8 +34,16 @@
                             <label for="nombre" class="col-md-12 col-form-label">Nombre del grupo</label>
                             <div class="col-md-12">
                                 <input type="text" class="form-control innerShadow" id="nombreGrupo" name="nombre"
-                                       placeholder="Nombre del grupo" value="{{ old("nombre") }}" required>
+                                       placeholder="Nombre del grupo" value="{{ old("nombre") }}">
                                 {!!  $errors->first('nombre', "<small class='text-danger'>:message</small>") !!}
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="numero" class="col-md-12 col-form-label">Numero del grupo</label>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control innerShadow" id="numeroGrupo" name="numero"
+                                       placeholder="Numero del grupo" value="{{ old("numero") }}" required>
+                                {!!  $errors->first('numero', "<small class='text-danger'>:message</small>") !!}
                             </div>
                         </div>
                         <div class="form-group row align-items-center">
@@ -45,7 +52,8 @@
                                     <button type="button" class="btn btn-secondary btn-sm ml-auto" data-dismiss="modal">
                                         Cancel
                                     </button>
-                                    <button type="submit" class="btn btn-primary btn-green-moon btn-sm ml-1">Guardar
+                                    <button type="submit" class="btn btn-primary btn-green-moon btn-sm ml-1">
+                                        Guardar
                                     </button>
                                 </div>
                             </div>
@@ -64,15 +72,12 @@
         $('#asignarGrupoModal').modal('show');
     }
 
-    @if(old('nivelJerarquico'))
+    @if(old('nivelJerarquico') or $errors->any())
     $(document).ready(function () {
         showModalNuevoGrupo({
             "componente_id": {{ old('nivelJerarquico') }}
         });
     });
-    @else
-    // $(document).ready(function () {
-    //     showModalNuevoGrupo(56);
-    // });
     @endif
+
 </script>

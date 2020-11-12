@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="{{ mix('css/miembros.css') }}">
     <link rel="stylesheet" href="{{ mix('css/ippopup.css') }}">
     <link rel="stylesheet" href="{{ mix('css/posiciones-jerarquia.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/cambio-jerarquia.css') }}">
 @endsection
 
 @section('content')
@@ -85,7 +86,7 @@
                     </td>
                     <td>
                         <button class="btn btn-primary shadow btn-green-moon mx-4" type="submit"
-                                onclick="showModalPrueba({{ 'miembros.roles'  }})">Ver
+                                onclick="showModalPosicionesJerarquia({{ $miembro }})">Ver
                         </button>
                     </td>
                     <td>
@@ -100,15 +101,6 @@
             </tbody>
         </table>
     </div>
-
     @include('partials.ippopup')
-
     @include('partials.posiciones-jerarquia')
-    <script type="text/javascript">
-        function showModalPrueba(args) {
-            $('#reserveModal').modal('show');
-        }
-
-    </script>
-    {{-- {{ dd($miembros) }} --}}
 @endsection

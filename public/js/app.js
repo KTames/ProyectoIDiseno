@@ -25160,6 +25160,17 @@ __webpack_require__(/*! bootstrap/dist/js/bootstrap.bundle */ "./node_modules/bo
 
 /***/ }),
 
+/***/ "./resources/sass/cambio-jerarquia.scss":
+/*!**********************************************!*\
+  !*** ./resources/sass/cambio-jerarquia.scss ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/sass/edit-miembros.scss":
 /*!*******************************************!*\
   !*** ./resources/sass/edit-miembros.scss ***!
@@ -25249,24 +25260,25 @@ __webpack_require__(/*! bootstrap/dist/js/bootstrap.bundle */ "./node_modules/bo
 /***/ }),
 
 /***/ 0:
-/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/welcome.scss ./resources/sass/horizontal-layout.scss ./resources/sass/admin.index.scss ./resources/sass/miembros.scss ./resources/sass/jerarquia.scss ./resources/sass/edit-miembros.scss ./resources/sass/asignar-grupo.scss ./resources/sass/posiciones-jerarquia.scss ./resources/sass/ippopup.scss ./resources/sass/movimientos-catalog.scss ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/welcome.scss ./resources/sass/horizontal-layout.scss ./resources/sass/admin.index.scss ./resources/sass/miembros.scss ./resources/sass/jerarquia.scss ./resources/sass/edit-miembros.scss ./resources/sass/asignar-grupo.scss ./resources/sass/posiciones-jerarquia.scss ./resources/sass/cambio-jerarquia.scss ./resources/sass/ippopup.scss ./resources/sass/movimientos-catalog.scss ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/stevenquesada/Sites/ProyectoIDiseno/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /Users/stevenquesada/Sites/ProyectoIDiseno/resources/sass/app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! /Users/stevenquesada/Sites/ProyectoIDiseno/resources/sass/welcome.scss */"./resources/sass/welcome.scss");
-__webpack_require__(/*! /Users/stevenquesada/Sites/ProyectoIDiseno/resources/sass/horizontal-layout.scss */"./resources/sass/horizontal-layout.scss");
-__webpack_require__(/*! /Users/stevenquesada/Sites/ProyectoIDiseno/resources/sass/admin.index.scss */"./resources/sass/admin.index.scss");
-__webpack_require__(/*! /Users/stevenquesada/Sites/ProyectoIDiseno/resources/sass/miembros.scss */"./resources/sass/miembros.scss");
-__webpack_require__(/*! /Users/stevenquesada/Sites/ProyectoIDiseno/resources/sass/jerarquia.scss */"./resources/sass/jerarquia.scss");
-__webpack_require__(/*! /Users/stevenquesada/Sites/ProyectoIDiseno/resources/sass/edit-miembros.scss */"./resources/sass/edit-miembros.scss");
-__webpack_require__(/*! /Users/stevenquesada/Sites/ProyectoIDiseno/resources/sass/asignar-grupo.scss */"./resources/sass/asignar-grupo.scss");
-__webpack_require__(/*! /Users/stevenquesada/Sites/ProyectoIDiseno/resources/sass/posiciones-jerarquia.scss */"./resources/sass/posiciones-jerarquia.scss");
-__webpack_require__(/*! /Users/stevenquesada/Sites/ProyectoIDiseno/resources/sass/ippopup.scss */"./resources/sass/ippopup.scss");
-module.exports = __webpack_require__(/*! /Users/stevenquesada/Sites/ProyectoIDiseno/resources/sass/movimientos-catalog.scss */"./resources/sass/movimientos-catalog.scss");
+__webpack_require__(/*! /Users/macbook/Projects/PHP/Laravel/ProyectoIDiseno/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /Users/macbook/Projects/PHP/Laravel/ProyectoIDiseno/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/macbook/Projects/PHP/Laravel/ProyectoIDiseno/resources/sass/welcome.scss */"./resources/sass/welcome.scss");
+__webpack_require__(/*! /Users/macbook/Projects/PHP/Laravel/ProyectoIDiseno/resources/sass/horizontal-layout.scss */"./resources/sass/horizontal-layout.scss");
+__webpack_require__(/*! /Users/macbook/Projects/PHP/Laravel/ProyectoIDiseno/resources/sass/admin.index.scss */"./resources/sass/admin.index.scss");
+__webpack_require__(/*! /Users/macbook/Projects/PHP/Laravel/ProyectoIDiseno/resources/sass/miembros.scss */"./resources/sass/miembros.scss");
+__webpack_require__(/*! /Users/macbook/Projects/PHP/Laravel/ProyectoIDiseno/resources/sass/jerarquia.scss */"./resources/sass/jerarquia.scss");
+__webpack_require__(/*! /Users/macbook/Projects/PHP/Laravel/ProyectoIDiseno/resources/sass/edit-miembros.scss */"./resources/sass/edit-miembros.scss");
+__webpack_require__(/*! /Users/macbook/Projects/PHP/Laravel/ProyectoIDiseno/resources/sass/asignar-grupo.scss */"./resources/sass/asignar-grupo.scss");
+__webpack_require__(/*! /Users/macbook/Projects/PHP/Laravel/ProyectoIDiseno/resources/sass/posiciones-jerarquia.scss */"./resources/sass/posiciones-jerarquia.scss");
+__webpack_require__(/*! /Users/macbook/Projects/PHP/Laravel/ProyectoIDiseno/resources/sass/cambio-jerarquia.scss */"./resources/sass/cambio-jerarquia.scss");
+__webpack_require__(/*! /Users/macbook/Projects/PHP/Laravel/ProyectoIDiseno/resources/sass/ippopup.scss */"./resources/sass/ippopup.scss");
+module.exports = __webpack_require__(/*! /Users/macbook/Projects/PHP/Laravel/ProyectoIDiseno/resources/sass/movimientos-catalog.scss */"./resources/sass/movimientos-catalog.scss");
 
 
 /***/ })

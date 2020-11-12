@@ -49,8 +49,16 @@ class MiembrosController extends Controller
     }
 
     public function obtenerRolesMiembro(Miembro $miembro) {
-        return ['posicionesJerarquia' =>session('movimiento')->gestorMiembros()->posicionJerarquia($miembro)];
+        return session('movimiento')->gestorMiembros()->posicionesMiembroJerarquia($miembro);
     }
 
+    public function asignarRol() {
+        session('movimiento')->gestorMiembros()->asignarRol(
+            request()->nivelJerarquico,
+            request()->miembro,
+            request()->viejoRol,
+            request()->rol,
+        );
+    }
 
 }

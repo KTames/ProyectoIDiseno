@@ -5,11 +5,31 @@ namespace App\Http\Controllers;
 use App\Models\Componente;
 use App\Models\Grupo;
 use App\Models\Miembro;
+use App\Models\Movimiento;
 use App\Models\NivelJerarquico;
 use App\Models\NivelPadre;
 
 class GestorJerarquia
 {
+    // Sí sirve pero al final no lo ocupamos jaja
+//    public function obtenerMovimiento(NivelJerarquico $nivelJerarquico) {
+//        while ($nivelJerarquico->padre()->exists())
+//            $nivelJerarquico = $nivelJerarquico->padre()->first();
+//
+//        return Movimiento::where(['root_id', '=', $nivelJerarquico->componente_id])->first();
+//    }
+
+    public function validarNombreGrupoUnico(NivelJerarquico $padre, $nombre)
+    {
+        if ($padre->nombre == $nombre)
+            return false;
+        foreach ($padre->niveles()->get() as $hijo)
+            if (!$this->validarNombreGrupoUnico($hijo->nivelJerarquico()->first(), $nombre))
+                return false;
+
+        return true;
+    }
+
     private function createNivelJerarquico($nombre, $tipo = null, $params = [])
     {
         $componenteId = Componente::create([])->id;
@@ -34,8 +54,6 @@ class GestorJerarquia
 
     public function borrar(NivelJerarquico $nivelJerarquico)
     {
-//        dd($nivelJerarquico);
-
         $nivelJerarquico->hijos()->detach($nivelJerarquico->hijos()->get());
 
         $concreto = $nivelJerarquico->concreto();
@@ -53,11 +71,34 @@ class GestorJerarquia
         $nivelJerarquico->delete();
     }
 
+    public function crearNombre()
+    {
+        $phonetics = array("Alfa", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "India", "Juliett", "Kilo", "Lima", "Mike", "November", "Oscar", "Papa", "Quebec", "Romeo", "Sierra", "Tango", "Uniform", "Victor", "Whisky", "X-ray", "Yankee", "Zulu");
+
+        $randNum = rand(0, 26);
+
+        $randNumGrupo = rand(0, 100);
+
+        $randName = $phonetics[$randNum] . " " . $randNumGrupo;
+
+        return $randName;
+    }
+
     public function crearGrupo($datos)
     {
         $nivelJerarquico = NivelJerarquico::where(['componente_id' => $datos["nivelJerarquico"]])->first();
 
-        $nuevoNivel = $this->createNivelJerarquico($datos['nombre'], Grupo::class, ["numero_grupo" => $nivelJerarquico->niveles()->count() + 1]);
+        if (isset($datos["nombre"])) {
+            $nuevoNivel = $this->createNivelJerarquico($datos["nombre"], Grupo::class, ["numero_grupo" => $datos["numero"]]);
+
+        } else {
+            $raiz = session('movimiento')->raiz();
+
+            do
+                $nuevoNombre = $this->crearNombre();
+            while (!$this->validarNombreGrupoUnico($raiz, $nuevoNombre));
+            $nuevoNivel = $this->createNivelJerarquico($nuevoNombre, Grupo::class, ["numero_grupo" => $datos["numero"]]);
+        }
 
         $monitor1 = Miembro::where(['identificacion' => $datos["monitor1"]])->first();
         $nuevoNivel->concreto()->jefes()->attach($monitor1);
@@ -102,33 +143,28 @@ class GestorJerarquia
         return Miembro::whereNotIn('componente_id', $asignados)->get();
     }
 
-    public function obtenerMiembros($nivelId)
+    public function obtenerMiembros($nivelId, $incluirNoAsignados = true)
     {
         $nivelJerarquico = NivelJerarquico::where(['componente_id' => $nivelId])->first();
         $miembros = [];
         $concreto = $nivelJerarquico->concreto();
 
         if ($nivelJerarquico->concreto() instanceof Grupo) {
-            // Es un grupo
-            // $miembros = ["jefes" => [24, 53, 70], "monitores" => [], "miembros" => []]
 
-            // buscar todos los miembros que no estén en jefes => array(miembros)
+            $miembros["miembro"] =
+                $nivelJerarquico->miembros()
+                    ->whereNotIn('componente_id', $concreto->jefes()->pluck('componente_id'))
+                    ->get()
+                    ->map(function ($miembro) {
+                        return $miembro->concreto();
+                    });
 
-            $miembros["miembros"] =
-                $nivelJerarquico->miembros()->whereNotIn('componente_id', $concreto->jefes()->pluck('componente_id'))->get();
-
-            $miembros["miembros"] = $miembros["miembros"]->map(function ($miembro) {
-                return $miembro->concreto();
-            });
-
-            $miembros["monitores"] =
+            $miembros["monitor"] =
                 $concreto->jefes()->whereNotIn('componente_id', $nivelJerarquico->miembros()->pluck('componente_id'))->get();
 
-            $miembros["jefes"] =
+            $miembros["jefe"] =
                 $concreto->jefes()->whereIn('componente_id', $nivelJerarquico->miembros()->pluck('componente_id'))->get();
 
-            // buscar todos los jefes que no estén en miembros => monitores
-            // buscar todos los jefes que estén en miembros => jefes
         } else {
             // Es un nivel padre
 
@@ -137,23 +173,62 @@ class GestorJerarquia
             // (hay que ver si, de los grupos, solamente los monitores son miembros de las ramas. En este caso, para cada nivel
             // jerárquico hijo, hay que preguntar si es un NivelPadre o un Grupo, y si es Grupo, mostrar solamente los monitores y no los jefes)
 
-            $miembros["jefes"] =
-                $nivelJerarquico->miembros()->whereIn('componente_id', $nivelJerarquico->miembros()->pluck('componente_id'))->get();
+            $miembros["jefe"] =
+                $nivelJerarquico->miembros()
+                    ->get()
+                    ->map(function ($miembro) {
+                        return $miembro->concreto();
+                    });
 
-            $miembros["monitores"] = [];
+            $miembros["miembro"] = collect([]);
 
-            $miembros["miembros"] = [];
-                foreach($nivelJerarquico->niveles()->get() as $subNivel){
-
-                    $subArray = $this->obtenerMiembros($subNivel['id']);
-
-                    $miembros["miembros"] = array_where($subArray,'miembros');
+            foreach ($nivelJerarquico->niveles()->get() as $subNivel) {
+                $subArray = $this->obtenerMiembros($subNivel['id'], false);
+                $monitores = $subArray["monitor"] ?? collect([]);
+                $jefes = $subArray["jefe"] ?? collect([]);
+                $miembros["miembro"] = $miembros["miembro"]->concat($monitores)->concat($jefes);
             }
 
         }
-        dd($miembros);
 
+        if ($incluirNoAsignados) {
+            $noAsignados = $this->obtenerMiembrosNoAsignados($miembros);
+            $miembros["ninguno"] = $noAsignados;
+        }
+        //dd($miembros);
         return $miembros;
     }
 
+    private function obtenerRol(Miembro $miembro, NivelJerarquico $nivelJerarquico)
+    {
+        $concreto = $nivelJerarquico->concreto();
+        if ($concreto instanceof Grupo) {
+            $esMiembro = $nivelJerarquico->miembros()->where('id', '=', $miembro->componente_id)->exists();
+            $esJefe = $concreto->jefes()->where('componente_id', '=', $miembro->componente_id)->exists();
+
+            return $esJefe ? $esMiembro ? "jefe" : "monitor" : "miembro";
+        }
+        return "jefe";
+    }
+
+    public function obtenerJerarquiaMismoNivel(NivelJerarquico $nivel)
+    {
+        $concreto = $nivel->concreto();
+
+        $nivelesMismoNivel = collect([]);
+        if ($concreto instanceof Grupo) {
+            $nivelesMismoNivel = $nivelesMismoNivel->merge(
+                Grupo::where('nivel_jerarquico_id', '!=', $nivel->componente_id)->get()
+            );
+
+        } else {
+            $nivelesMismoNivel = $nivelesMismoNivel->merge(
+                NivelPadre::where('nivel_jerarquico_id', '!=', $nivel->componente_id)->where('nivel', '=', $concreto->nivel)->get()
+            );
+        }
+
+        return $nivelesMismoNivel->map(function ($e) {
+            return $e->nivelJerarquico()->first();
+        });
+    }
 }
