@@ -28,7 +28,7 @@ class MiembrosTableSeeder extends Seeder
         ]);
         Miembro::factory()->create([
             'nombreCompleto' => 'Carlos Vega Núñez',
-            'identificacion' => '11720740'
+            'identificacion' => '117920740'
         ]);
         Miembro::factory()->create([
             'nombreCompleto' => 'Elras Cabuches'

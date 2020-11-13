@@ -57,8 +57,8 @@ Route::get('/pruebaNoAsignados', function () {
 
 Route::get('/rolesMiembros/{miembro}', [MiembrosController::class,'obtenerRolesMiembro'])->name('miembros.roles');
 
-Route::get('/cambioJerarquico/{nivelJerarquico}/', [JerarquiaController::class, 'obtenerJerarquiaMismoNivel'])->middleware('movimiento');;
-Route::put('/cambioJerarquico/', [JerarquiaController::class, 'cambiarDeNivel'])->middleware('movimiento')->name('miembros.cambiarNivel');
+Route::get('/cambioJerarquico/{nivelJerarquico}/', [JerarquiaController::class, 'obtenerJerarquiaMismoNivel'])->middleware('movimiento');
+Route::put('/cambioJerarquico', [JerarquiaController::class, 'cambiarDeNivel'])->middleware('movimiento')->name('miembros.cambiarNivel');
 
 
 Route::post('/asignarRol', [MiembrosController::class, 'asignarRol'])->name('miembros.asignarRol');

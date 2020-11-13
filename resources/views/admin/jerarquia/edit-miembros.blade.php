@@ -88,15 +88,20 @@
                                 <input type="hidden" name="miembro" value="{{ $miembro->componente_id }}">
                                 <input type="hidden" name="viejoRol" value="{{ $rol }}">
                                 <select name="rol" class="btn-green-moon btnR justify-content-center"
-                                        onchange="mostrarAlertaCambioRol('{{ $rol }}',$nivelJerarquico->componente_id,$miembro->componente_id, this.value, this.form)">
+                                        onchange="mostrarAlertaCambioRol('{{ $rol }}',{{$nivelJerarquico->componente_id}},{{$miembro->componente_id}}, this.value, this.form)">
                                     @foreach($rolesDisponibles as $rolCambio)
+
                                         <option
                                             value="{{ $rolCambio }}"
                                             {{ $rol == $rolCambio
-                                                ? 'disabled selected'
+                                                ||($nivelJerarquico->concreto() instanceof App\Models\NivelPadre && $rolCambio == "miembro")
+                                                ? 'disabled'
                                                 : ''
-                                            }}
-                                        >
+                                            }}{{ $rol == $rolCambio
+                                                ? ' selected'
+                                                :''
+
+                                            }}>
                                             {{ ucfirst($rolCambio) }}
                                         </option>
                                     @endforeach
@@ -114,10 +119,12 @@
         function mostrarAlertaCambioRol(viejoRol, nivelJerarquico,miembro,nuevoRol, form) {
             if (confirm('¿Está seguro de que quiere cambiar el ' + viejoRol + ' a ' + nuevoRol + '?')){
                 form.submit();
-                {{--No funciona :c--}}
-                $.ajax('/asignarRol/').done((data) => _asignarRol(nivelJerarquico,miembro, viejoRol, nuevoRol));
+                console.log(viejoRol);
+                // {{--No funciona :c--}}
+                //echo(nivelJerarquico);
+                //dd(viejoRol);
+                $.ajax('/asignarRol').done((data) => asignarRol(nivelJerarquico,miembro, viejoRol, nuevoRol));
             }
-                
         }
 
         $(document).ready(function () {
