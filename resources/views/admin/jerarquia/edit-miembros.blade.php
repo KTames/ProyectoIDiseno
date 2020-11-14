@@ -9,21 +9,19 @@
 
         <div class="col-md-5 col-sm-12 d-flex my-3 mr-3">
             <div class="row mx-0 ">
-                <div class="pl-5">
-                    <h2 class="nunito-bold">Editar miembros</h2>
-                </div>
-                <div class="col-md-12 col-sm-12 ml-5 mt-3 ">
+                <form  action="{{ route('jerarquia.miembros', $nivelJerarquico) }}">
                     <label class="mr-5">Filtrar por:</label>
-                    <input class="filterby mr-2 mb-3" type="text" class="form-control inner-shadow " id="filterby"
-                           name="filtrar" placeholder="Valor a buscar">
+                    <input class="input-shadow w-100 mr-2 mb-3" type="text" class="form-control inner-shadow "
+                           id="filterby" name="valor" placeholder="Valor a buscar" value="{{ isset($filtro) ? $filtro['valor'] : '' }}">
+
+                    <div class="col-md-12 col-sm-12  mb-3">
+                        <input class="" type="radio" name="filtro" value="identificacion" {{ isset($filtro) ? $filtro['filtro'] == 'identificacion' ? 'checked' : '' : 'checked' }}>
+                        <label>Identificación</label>
+                        <input class="ml-3" type="radio" name="filtro" value="nombreCompleto" {{ isset($filtro) ? $filtro['filtro'] == 'nombreCompleto' ? 'checked' : '' : '' }}>
+                        <label for="name">Nombre</label>
+                    </div>
                     <button class="btn btn-primary btn-block shadow btn-green-moon" type="submit">Buscar</button>
-                </div>
-                <div class="col-md-12 col-sm-12  ml-5 mt-3">
-                    <input class="ml-2" type="radio" id="identification" name="filter" value="identification">
-                    <label for="identification">Identificación</label>
-                    <input class="ml-3" type="radio" id="name" name="filter" value="name">
-                    <label for="name">Nombre</label>
-                </div>
+                </form>
             </div>
         </div>
 
