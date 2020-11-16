@@ -36,7 +36,7 @@ Route::put('/jerarquia/', [JerarquiaController::class, 'crearGrupo'])->name('jer
 Route::put('/jerarquia/{nivelJerarquico}', [JerarquiaController::class, 'crearNivelPadre'])->name('jerarquia.crearNivelJerarquico')->middleware('movimiento');
 Route::delete('/jerarquia/{nivelJerarquico}', [JerarquiaController::class, 'delete'])->name('jerarquia.destroy')->middleware('movimiento');
 Route::get('/jerarquia/{nivelJerarquico}/miembros', [JerarquiaController::class, 'verMiembros'])->name('jerarquia.miembros')->middleware('movimiento');
-
+Route::get('/jerarquia/{nivelJerarquico}/filtroMiembros', [JerarquiaController::class, 'verMiembrosFiltro'])->name('jerarquia.miembrosFiltro')->middleware('movimiento');
 // Route::get('/jerarquia', [JerarquiController:: class, ''])->name('jerarquia.editMiembro');
 
 Route::get('/movimientos', function () { return view('admin.movimientos-catalog', ['movimientos' => Movimiento::all()]); })->name('movimientos.index');
