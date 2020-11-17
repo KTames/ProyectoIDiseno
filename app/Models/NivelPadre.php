@@ -9,11 +9,12 @@ class NivelPadre extends Model
 {
     use HasFactory;
     public $guarded = [];
-
+    protected $primaryKey = "nivel_jerarquico_id";
     protected $table = "niveles_padre";
+
     public $incrementing = false;
 
     public function nivelJerarquico() {
-        return $this->belongsTo(NivelJerarquico::class);
+        return $this->belongsTo(NivelJerarquico::class, "nivel_jerarquico_id");
     }
 }

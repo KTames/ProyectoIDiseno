@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 
 class MiembrosController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        if (isset($request->filtro))
-            return view('admin.miembros', ['miembros' => session('movimiento')->gestorMiembros()->obtenerCatalogo($request->all())->get(), 'filtro' => $request->all()]);
+        if (isset(request()->filtro))
+            return view('admin.miembros', ['miembros' => session('movimiento')->gestorMiembros()->obtenerCatalogo(request()->all())->get(), 'filtro' => request()->all()]);
 
         return view('admin.miembros', ['miembros' => session('movimiento')->gestorMiembros()->obtenerCatalogo()->get()]);
     }
@@ -18,7 +18,7 @@ class MiembrosController extends Controller
     public function delete(Miembro $miembro)
     {
         session('movimiento')->gestorMiembros()->deleteMiembro($miembro);
-        return $this->index();
+        return back();
     }
 
     public function edit(Request $request)
@@ -46,6 +46,20 @@ class MiembrosController extends Controller
         session('movimiento')->gestorMiembros()->crearMiembro($data);
 
         return back();
+    }
+
+    public function obtenerRolesMiembro(Miembro $miembro) {
+        return session('movimiento')->gestorMiembros()->posicionesMiembroJerarquia($miembro);
+    }
+
+    public function asignarRol() {
+        session('movimiento')->gestorMiembros()->asignarRol(
+            request()->nivelJerarquico,
+            request()->miembro,
+            request()->viejoRol,
+            request()->rol,
+        );
+       return back();
     }
 
 }

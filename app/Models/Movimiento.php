@@ -35,4 +35,8 @@ class Movimiento extends Model
     public function raiz() {
         return $this->hasOne(NivelJerarquico::class, "componente_id", "root_id")->first();
     }
+    
+    public function inicializar($datos) {
+        $this->gestorJerarquia()->inicializarMovimiento($this, $datos);
+    }
 }

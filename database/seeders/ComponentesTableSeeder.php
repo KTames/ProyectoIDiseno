@@ -81,26 +81,67 @@ class ComponentesTableSeeder extends Seeder
         );
         $rama1->hijos()->attach($grupo2->componente);
 
-        foreach (Miembro::where([['componente_id', '>', 10], ['componente_id', '<', 30]])->get() as $miembro)
-            $zona1->hijos()->attach($miembro->componente);
+//        foreach (Miembro::where([['componente_id', '>', 10], ['componente_id', '<', 30]])->get() as $miembro)
+//            $zona1->hijos()->attach($miembro->componente);
 
-        foreach (Miembro::where([['componente_id', '>=', 30], ['componente_id', '<=', 45]])->get() as $miembro)
-            $grupo1->hijos()->attach($miembro->componente);
+//        foreach (Miembro::where([['componente_id', '>=', 30], ['componente_id', '<=', 45]])->get() as $miembro)
+//            $grupo1->hijos()->attach($miembro->componente);
+//
+//        foreach (Miembro::where([['componente_id', '>=', 40]])->get() as $miembro)
+//            $grupo1->concreto()->jefes()->attach($miembro);
 
-        foreach (Miembro::where([['componente_id', '>=', 40]])->get() as $miembro)
-            $grupo1->concreto()->jefes()->attach($miembro);
+        // Zona 1
+        //      - 2 jefes
+        //      Rama 1
+        //              - 2 jefes
+        //              Grupo 1
+        //                      - 1 monitor
+        //                      - 5 miembros
+        //              Grupo 2
+        //                      - 2 jefes
+        //                      - 3 miembros
+        //      Rama 2
+        //              - 2 jefes
+        // Zona 2
 
-//        Miembro::where([
-//            ['componente_id', '>', 20],
-//            ['componente_id', '<', 30],
-//        ])
-//            ->get()
-//            ->map(function ($miembro) {
-//                return $miembro->componente()->first();
-//            })
-//            ->each(
-//                function ($item) use ($grupo1) {
-//                    $grupo1->hijos()->attach($item);
-//                });
+        $coordinacion->hijos()->attach(
+            Miembro::where(['componente_id' => 1])->first()->componente()->first()
+        );
+
+        $grupo1->concreto()->jefes()->attach(
+            Miembro::where(['componente_id' => 51])->first()
+        );
+
+        $grupo1->miembros()->attach(Miembro::where('componente_id', '>=', 10)->where('componente_id', '<=', 15)->get()->map(
+            function ($e) {
+                return $e->componente()->first();
+            })
+        );
+
+        $grupo2->concreto()->jefes()->attach(
+            Miembro::where('componente_id', '=', 16)->orWhere('componente_id', '=', 17)->get()
+        );
+
+        $grupo2->miembros()->attach(Miembro::where('componente_id', '>=', 16)->where('componente_id', '<=', 20)->get()->map(
+            function ($e) {
+                return $e->componente()->first();
+            })
+        );
+
+        $rama1->miembros()->attach(
+            Miembro::where(['componente_id' => 52])->first()->componente()->first()
+        );
+
+        $rama1->miembros()->attach(
+            Miembro::where(['componente_id' => 53])->first()->componente()->first()
+        );
+
+        $zona1->miembros()->attach(
+            Miembro::where(['componente_id' => 54])->first()->componente()->first()
+        );
+
+        $zona1->miembros()->attach(
+            Miembro::where(['componente_id' => 55])->first()->componente()->first()
+        );
     }
 }
