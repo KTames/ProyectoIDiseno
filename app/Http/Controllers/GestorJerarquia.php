@@ -143,18 +143,19 @@ class GestorJerarquia
         return Miembro::whereNotIn('componente_id', $asignados);
     }
 
+    private function query($filtro, $valor) {
+        if ($filtro === "nombreCompleto")
+            return Miembro::where($filtro, "like", "%" . $valor . "%");
+        else return Miembro::where(["identificacion" => $valor]);
+    }
+
     private function aplicarFiltroAMiembros($miembros, $filtro, $valor) {
         if (trim($filtro ?? '') != '' && trim($valor ?? '') != '')
         {
             $miembrosResult = [];
-            $query = null;
-            if ($filtro === "nombreCompleto")
-                $query = Miembro::where($filtro, "like", "%" . $valor . "%");
-            else $query = Miembro::where(["identificacion" => $valor]);
-
 
             foreach ($miembros as $rol => $submiembros)
-                $miembrosResult[$rol] = $query->whereIn('componente_id', $submiembros->pluck('componente_id'))->get();
+                $miembrosResult[$rol] = $this->query($filtro, $valor)->whereIn('componente_id', $submiembros->pluck('componente_id'))->get();
 
             return $miembrosResult;
         }
