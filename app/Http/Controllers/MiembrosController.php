@@ -59,6 +59,7 @@ class MiembrosController extends Controller
             request()->viejoRol,
             request()->rol,
         );
+       return back();
     }
 
 }

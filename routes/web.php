@@ -36,6 +36,7 @@ Route::put('/jerarquia/', [JerarquiaController::class, 'crearGrupo'])->name('jer
 Route::put('/jerarquia/{nivelJerarquico}', [JerarquiaController::class, 'crearNivelPadre'])->name('jerarquia.crearNivelJerarquico')->middleware('movimiento');
 Route::delete('/jerarquia/{nivelJerarquico}', [JerarquiaController::class, 'delete'])->name('jerarquia.destroy')->middleware('movimiento');
 Route::get('/jerarquia/{nivelJerarquico}/miembros', [JerarquiaController::class, 'verMiembros'])->name('jerarquia.miembros')->middleware('movimiento');
+Route::get('/jerarquia/{nivelJerarquico}/filtroMiembros', [JerarquiaController::class, 'verMiembrosFiltro'])->name('jerarquia.miembrosFiltro')->middleware('movimiento');
 // Route::get('/jerarquia', [JerarquiController:: class, ''])->name('jerarquia.editMiembro');
 
 Route::get('/movimientos', function () { return view('admin.movimientos-catalog', ['movimientos' => Movimiento::all()]); })->name('movimientos.index');
@@ -57,8 +58,8 @@ Route::get('/pruebaNoAsignados', function () {
 
 Route::get('/rolesMiembros/{miembro}', [MiembrosController::class,'obtenerRolesMiembro'])->name('miembros.roles');
 
-Route::get('/cambioJerarquico/{nivelJerarquico}/', [JerarquiaController::class, 'obtenerJerarquiaMismoNivel'])->middleware('movimiento');;
-Route::put('/cambioJerarquico/', [JerarquiaController::class, 'cambiarDeNivel'])->middleware('movimiento')->name('miembros.cambiarNivel');
+Route::get('/cambioJerarquico/{nivelJerarquico}/', [JerarquiaController::class, 'obtenerJerarquiaMismoNivel'])->middleware('movimiento');
+Route::put('/cambioJerarquico', [JerarquiaController::class, 'cambiarDeNivel'])->middleware('movimiento')->name('miembros.cambiarNivel');
 
 
 Route::post('/asignarRol', [MiembrosController::class, 'asignarRol'])->name('miembros.asignarRol');
@@ -66,3 +67,4 @@ Route::post('/asignarRol', [MiembrosController::class, 'asignarRol'])->name('mie
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/jerarquia/{nivelJerarquico}/miembros', [JerarquiaController::class, 'verMiembros'])->name('jerarquia.miembros')->middleware('movimiento');

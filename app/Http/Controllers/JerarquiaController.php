@@ -123,20 +123,16 @@ class JerarquiaController extends Controller
 
     public function verMiembros(NivelJerarquico $nivelJerarquico)
     {
-        $miembrosSinFiltrar = session('movimiento')->gestorJerarquia()->obtenerMiembros($nivelJerarquico->componente_id);
-        $rolesDisponibles = array_keys($miembrosSinFiltrar);
-        $miembros = collect([]);
+        $filtro = request()->filtroMiembros;
+        $valor = request()->valor;
         $rolesFiltrados = request()->filtro;
 
-        if ($rolesFiltrados != null) {
-            foreach ($rolesFiltrados as $rolFiltrado)
-                $miembros = $miembros->merge([$rolFiltrado => $miembrosSinFiltrar[$rolFiltrado]]);
-        } else
-            foreach ($miembrosSinFiltrar as $key => $rol)
-                $miembros = $miembros->merge([$key => $rol]);
-        //dd($miembros);
+        $miembrosSinFiltrar = session('movimiento')->gestorJerarquia()->obtenerMiembros($nivelJerarquico->componente_id, true, $filtro, $valor);
+        $rolesDisponibles = array_keys($miembrosSinFiltrar);
+        
+        $miembros = session('movimiento')->gestorJerarquia()->filtrarRoles($rolesFiltrados, $miembrosSinFiltrar);
 
-        return view('admin.jerarquia.edit-miembros', compact('nivelJerarquico', 'miembros', 'rolesDisponibles', 'rolesFiltrados'));
+        return view('admin.jerarquia.edit-miembros', compact('nivelJerarquico', 'miembros', 'rolesDisponibles', 'rolesFiltrados', 'filtro', 'valor'));
     }
 
     public function obtenerJerarquiaMismoNivel(NivelJerarquico $nivelJerarquico)
@@ -159,3 +155,4 @@ class JerarquiaController extends Controller
         return back();
     }
 }
+    

@@ -80,7 +80,7 @@ class GestorMiembro
     private function removerDeRol($nivelJerarquico, $miembro, $rol)
     {
 
-        $concreto = $nivelJerarquico->concreto()->first();
+        $concreto = $nivelJerarquico->concreto();
 
         switch ($rol) {
             case "monitor":
@@ -91,10 +91,12 @@ class GestorMiembro
                 if ($concreto instanceof Grupo) {
                     $concreto->jefes()->detach($miembro);
                 }
-                $concreto->miembros()->detach($miembro->componente()->first());
+                // echo($nivelJerarquico->miembros());
+
+                $nivelJerarquico->miembros()->detach($miembro->componente()->first());
                 break;
             default:
-                $concreto->miembros()->detach($miembro->componente()->first());
+                $nivelJerarquico->miembros()->detach($miembro->componente()->first());
                 break;
         }
     }
@@ -102,7 +104,7 @@ class GestorMiembro
     private function agregarARol($nivelJerarquico, $miembro, $rol)
     {
 
-        $concreto = $nivelJerarquico->concreto()->first();
+        $concreto = $nivelJerarquico->concreto();
 
         switch ($rol) {
             case "monitor":
@@ -113,10 +115,10 @@ class GestorMiembro
                 if ($concreto instanceof Grupo) {
                     $concreto->jefes()->attach($miembro);
                 }
-                $concreto->miembros()->attach($miembro->componente()->first());
+                $nivelJerarquico->miembros()->attach($miembro->componente()->first());
                 break;
-            default:
-                $concreto->miembros()->attach($miembro->componente()->first());
+            case "miembro":
+                $nivelJerarquico->miembros()->attach($miembro->componente()->first());
                 break;
         }
     }
@@ -141,11 +143,13 @@ class GestorMiembro
     public function asignarRol($nivelJerarquicoId, $miembroId, $viejoRol, $nuevoRol)
     {
         $nivelJerarquico = NivelJerarquico::where(['componente_id' => $nivelJerarquicoId])->first();
-        $miembro = Miembro::where(['componente_id' => $miembroId])->first();
 
+        $miembro = Miembro::where(['componente_id' => $miembroId])->first();
+        //dd($nivelJerarquico,$miembro,$viejoRol,$nuevoRol);
         $this->removerDeRol($nivelJerarquico, $miembro, $viejoRol);
         $this->agregarARol($nivelJerarquico, $miembro, $nuevoRol);
 
+        return true;
     }
 
 }
