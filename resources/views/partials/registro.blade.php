@@ -1,3 +1,5 @@
+
+
 <link rel="stylesheet" href="{{ mix('css/ippopup.css') }}">
 
 <div class="modal fade" id="registro" tabindex="-1" role="dialog">
