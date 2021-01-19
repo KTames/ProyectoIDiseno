@@ -64,7 +64,7 @@ Route::put('/cambioJerarquico', [JerarquiaController::class, 'cambiarDeNivel'])-
 
 Route::post('/asignarRol', [MiembrosController::class, 'asignarRol'])->name('miembros.asignarRol');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes(['verify' => true]); 
 Route::get('/jerarquia/{nivelJerarquico}/miembros', [JerarquiaController::class, 'verMiembros'])->name('jerarquia.miembros')->middleware('movimiento');
+ 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

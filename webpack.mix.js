@@ -30,7 +30,9 @@ mix.autoload({
     .sass('resources/sass/movimientos-catalog.scss', 'public/css')
 ;
 
-// mix.browserSync('http://proyectoidiseno.test/');
+mix.browserSync('http://proyectoidiseno.test/');
+// mix.browserSync('127.0.0.1:8000');
 
 if (mix.inProduction())
     mix.version();
+

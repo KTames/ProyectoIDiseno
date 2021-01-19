@@ -143,20 +143,23 @@ class GestorJerarquia
         return Miembro::whereNotIn('componente_id', $asignados);
     }
 
+    private function query($filtro, $valor) {
+        if ($filtro === "nombreCompleto")
+            return Miembro::where($filtro, "like", "%" . $valor . "%");
+        else return Miembro::where(["identificacion" => $valor]);
+    }
+
     private function aplicarFiltroAMiembros($miembros, $filtro, $valor) {
-        if ($filtro !== null)
+        if (trim($filtro ?? '') != '' && trim($valor ?? '') != '')
         {
-            $query = null;
-            if ($filtro === "nombreCompleto")
-                $query = Miembro::where($filtro, "like", "%" . $valor . "%");
-            else $query = Miembro::where(["identificacion" => $valor]);
+            $miembrosResult = [];
 
-            // $miembros = ["monitor" => [{componente_id: 25}, {componente_id: 27}]];
             foreach ($miembros as $rol => $submiembros)
-            $miembros[$rol] = $query->whereIn('componente_id', $submiembros->pluck('componente_id'))->get();
-        }
+                $miembrosResult[$rol] = $this->query($filtro, $valor)->whereIn('componente_id', $submiembros->pluck('componente_id'))->get();
 
-        return $miembros;
+            return $miembrosResult;
+        }
+        return [];
     }
 
     public function obtenerMiembros($nivelId, $incluirNoAsignados = true, $filtro = null, $valor = null)
@@ -168,10 +171,9 @@ class GestorJerarquia
         if ($nivelJerarquico->concreto() instanceof Grupo) {
 
             $miembros["miembro"] =
-                
                     $nivelJerarquico->miembros()
                     ->whereNotIn('componente_id', $concreto->jefes()->pluck('componente_id'))
-                
+
                 ->get()
                 ->map(function ($miembro) {
                     return $miembro->concreto();
@@ -204,18 +206,17 @@ class GestorJerarquia
                 $subArray = $this->obtenerMiembros($subNivel['id'], false, $filtro, $valor);
                 $monitores = $subArray["monitor"] ?? collect([]);
                 $jefes = $subArray["jefe"] ?? collect([]);
-                $miembros["miembro"] = $miembros["miembro"]->concat($monitores)->concat($jefes);
+                $jefes = $jefes->merge($monitores);
+                $miembros["miembro"] = $miembros["miembro"]->concat($jefes);
             }
 
         }
-
         if ($incluirNoAsignados) {
             $noAsignados = $this->obtenerMiembrosNoAsignados($miembros)->get();
             $miembros["ninguno"] = $noAsignados;
         }
 
         $miembros = $this->aplicarFiltroAMiembros($miembros, $filtro, $valor);
-        //dd($miembros);
         return $miembros;
     }
 
@@ -254,14 +255,14 @@ class GestorJerarquia
 
     public function filtrarRoles($rolesFiltrados, $miembrosSinFiltrar) {
         $miembros = collect([]);
-    
+
         if ($rolesFiltrados != null) {
             foreach ($rolesFiltrados as $rolFiltrado)
                 $miembros = $miembros->merge([$rolFiltrado => $miembrosSinFiltrar[$rolFiltrado]]);
         } else
             foreach ($miembrosSinFiltrar as $key => $rol)
                 $miembros = $miembros->merge([$key => $rol]);
-    
+
         return $miembros;
     }
 }

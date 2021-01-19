@@ -129,7 +129,7 @@ class JerarquiaController extends Controller
 
         $miembrosSinFiltrar = session('movimiento')->gestorJerarquia()->obtenerMiembros($nivelJerarquico->componente_id, true, $filtro, $valor);
         $rolesDisponibles = array_keys($miembrosSinFiltrar);
-        
+
         $miembros = session('movimiento')->gestorJerarquia()->filtrarRoles($rolesFiltrados, $miembrosSinFiltrar);
 
         return view('admin.jerarquia.edit-miembros', compact('nivelJerarquico', 'miembros', 'rolesDisponibles', 'rolesFiltrados', 'filtro', 'valor'));
@@ -155,4 +155,3 @@ class JerarquiaController extends Controller
         return back();
     }
 }
-    
