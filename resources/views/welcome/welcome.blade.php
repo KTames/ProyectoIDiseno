@@ -20,33 +20,75 @@
                     <h1 class="text-white display-4">Iniciar Sesión</h1>
                 </div>
                 <div class="d-flex align-items-center">
-                    <form method="post" id="ippopupform">
-                        <div class="row">
-                            <div class="col-sm-3 text-white display-6"><label>Usuario:</label></div>
-                            <div class="col-sm-offset-1 col-sm-5">
-                                <input class="personalInfo inner-shadow" type="text" id="usuario"
-                                       name="usuario" placeholder="Usuario">
+                     <form method="POST" action="{{ route('login') }}">
+                        @csrf
+
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-white">{{ __('E-Mail Address') }}</label>
+
+                            <div class="col-md-8">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
-                        <div class="row mt-4">
-                            <div class="col-sm-3 text-white display-6"><label>Contraseña:</label></div>
-                            <div class="col-sm-offset-1 col-sm-5">
-                                <input class="personalInfo inner-shadow" type="password" id="password"
-                                       name="password" placeholder="Contraseña">
+
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-white">{{ __('Password') }}</label>
+
+                            <div class="col-md-8">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
-                    </form>    
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <button class="btn btn-primary shadow btn-green-moon mt-4 " class="editButton" type="submit"
-                            onclick="showRegistroModal()">Registrarse
-                        </button>
-                    </div>
-                    <div class="col-sm-6">
-                        <a href="{{ route('movimientos.index') }}" class="btn btn-primary mt-4 shadow btn-green-moon">Administrar</a>
-                    </div>
-                </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-3 mt-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                                    <label class="form-check-label text-white" for="remember">
+                                        {{ __('Remember Me') }}
+                                    </label> 
+                                </div>
+                            </div>
+                            <div class="col-md-6"> 
+                                 @if (Route::has('password.request'))
+                                    <a class="btn btn-link text-white" href="{{ route('password.request') }} ">
+                                        {{ __('Forgot Your Password?') }}
+                                    </a>
+                                    @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row ml-5"> 
+                            <div class="col-md-5 ">
+                                <button type="submit" class="btn btn-primary shadow btn-green-moon">
+                                    {{ __('Login') }}
+                                </button> 
+                            </div> 
+                        </div>
+                    </form>   
+                    </div> 
+                    <div class="d-flex align-items-center">
+                        <div class="row"> 
+                            <div class="col-md-5 ">
+                                    <button class="btn btn-primary shadow btn-green-moon" class="editButton" type="submit"
+                                        onclick="showRegistroModal()">Registrarse
+                                    </button>
+                            </div>
+                        </div> 
+                </div> 
             </div>
         </div>
 
