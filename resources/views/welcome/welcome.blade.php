@@ -71,25 +71,24 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                        <div class="form-group row ml-5"> 
+                            <div class="col-md-5 ">
+                                <button type="submit" class="btn btn-primary shadow btn-green-moon">
                                     {{ __('Login') }}
                                 </button> 
-                            </div>
+                            </div> 
                         </div>
                     </form>   
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <button class="btn btn-primary shadow btn-green-moon mt-4 " class="editButton" type="submit"
-                            onclick="showRegistroModal()">Registrarse
-                        </button>
-                    </div>
-                    <div class="col-sm-6">
-                        <a href="{{ route('movimientos.index') }}" class="btn btn-primary mt-4 shadow btn-green-moon">Administrar</a>
-                    </div>
-                </div>
+                    </div> 
+                    <div class="d-flex align-items-center">
+                        <div class="row"> 
+                            <div class="col-md-5 ">
+                                    <button class="btn btn-primary shadow btn-green-moon" class="editButton" type="submit"
+                                        onclick="showRegistroModal()">Registrarse
+                                    </button>
+                            </div>
+                        </div> 
+                </div> 
             </div>
         </div>
 

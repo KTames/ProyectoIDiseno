@@ -17,7 +17,7 @@
                     <div class="row mt-3">
                         <div class="col-sm-8">
                             <div class="form-group row">
-                                <label for="name" class="col-sm-4 text-white">{{ __('Name') }}</label>
+                                <label for="name" class="col-sm-4 text-white">{{ __('Identificación') }}</label>
 
                                 <div class="col-sm-offset-4 col-sm-8">
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror personalInfo inner-shadow" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
